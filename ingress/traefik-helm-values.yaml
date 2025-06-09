@@ -1,0 +1,35 @@
+service:
+  type: LoadBalancer
+  ports:
+    - name: dashboard
+      port: 8080
+      targetPort: 8080
+
+replicas: 3
+enableLeaderElection: true
+
+additionalArguments:
+  - "--api.dashboard=true"
+  - "--certificatesresolvers.letsencrypt.acme.storage=/data/acme.json"
+  - "--certificatesresolvers.letsencrypt.acme.dnschallenge.provider=route53"
+  - "--certificatesresolvers.letsencrypt.acme.dnschallenge.delaybeforecheck=0"
+  # - "--certificatesresolvers.letsencrypt.acme.caserver=https://acme-v02.api.letsencrypt.org/directory" # for debug/staging
+  - "--certificatesresolvers.letsencrypt.acme.caserver=https://acme-v02.api.letsencrypt.org/directory"
+  - "--certificatesresolvers.letsencrypt.acme.keytype=RSA4096"
+
+envFrom:
+  - secretRef:
+      name: route53-creds
+
+# Enable the websecure entryPoint
+entryPoints:
+  web:
+    address: ":80"
+  websecure:
+    address: ":443"
+  traefik:
+    address: ":8080"
+
+# Create default IngressClass if not set
+ingressClass:
+  enabled: true

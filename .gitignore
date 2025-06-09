@@ -1,0 +1,5 @@
+# SOPS private key - DO NOT COMMIT
+age.key
+
+# Rendered manifests for local testing
+rendered-manifests.yaml
