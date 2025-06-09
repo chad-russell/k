@@ -15,6 +15,15 @@ data:
     replicas: 3
     enableLeaderElection: true
 
+    # Persistent storage for ACME certificates
+    persistence:
+      enabled: true
+      name: data
+      size: 128Mi
+      storageClass: "longhorn"
+      path: /data
+      annotations: {}
+
     additionalArguments:
       - "--api.dashboard=true"
       - "--certificatesresolvers.letsencrypt.acme.storage=/data/acme.json"
