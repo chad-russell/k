@@ -15,5 +15,12 @@ spec:
         name: traefik
         namespace: flux-system
       interval: 12h
-  # Values will be patched in by kustomize
+  # The values will be injected by a kustomize patch
   values: {}
+  valuesFrom:
+    - kind: ConfigMap
+      name: traefik-helm-values
+      valuesKey: values.yaml
+    - kind: Secret
+      name: traefik-helm-secrets
+      valuesKey: secrets.yaml
