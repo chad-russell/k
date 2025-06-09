@@ -24,6 +24,14 @@ data:
       path: /data
       annotations: {}
 
+    # Use fsGroup to automatically set correct ownership
+    podSecurityContext:
+      fsGroup: 65532
+      fsGroupChangePolicy: "OnRootMismatch"
+      runAsGroup: 65532
+      runAsNonRoot: true
+      runAsUser: 65532
+
     additionalArguments:
       - "--api.dashboard=true"
       - "--certificatesresolvers.letsencrypt.acme.storage=/data/acme.json"
