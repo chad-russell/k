@@ -32,14 +32,19 @@ data:
       runAsNonRoot: true
       runAsUser: 65532
 
+    # Certificate resolvers for Let's Encrypt
+    certificatesResolvers:
+      letsencrypt:
+        acme:
+          storage: /data/acme.json
+          dnsChallenge:
+            provider: route53
+            delayBeforeCheck: 0
+          caServer: https://acme-v02.api.letsencrypt.org/directory
+          keyType: RSA4096
+
     additionalArguments:
       - "--api.dashboard=true"
-      - "--certificatesresolvers.letsencrypt.acme.storage=/data/acme.json"
-      - "--certificatesresolvers.letsencrypt.acme.dnschallenge.provider=route53"
-      - "--certificatesresolvers.letsencrypt.acme.dnschallenge.delaybeforecheck=0"
-      # - "--certificatesresolvers.letsencrypt.acme.caserver=https://acme-v02.api.letsencrypt.org/directory" # for debug/staging
-      - "--certificatesresolvers.letsencrypt.acme.caserver=https://acme-v02.api.letsencrypt.org/directory"
-      - "--certificatesresolvers.letsencrypt.acme.keytype=RSA4096"
 
     envFrom:
       - secretRef:
