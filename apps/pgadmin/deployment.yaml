@@ -31,7 +31,7 @@ spec:
             - name: PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION
               value: "True"
             - name: PGADMIN_CONFIG_LOGIN_BANNER
-              value: "PostgreSQL HA Cluster Management"
+              value: '"PostgreSQL HA Cluster Management"'
             - name: PGADMIN_CONFIG_CONSOLE_LOG_LEVEL
               value: "10"
           volumeMounts:
