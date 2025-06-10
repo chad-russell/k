@@ -19,5 +19,8 @@ resources:
   # Database
   - ./postgres
 
+  # Monitoring
+  - ./monitoring
+
   # Secrets - load last
   - ./secrets
