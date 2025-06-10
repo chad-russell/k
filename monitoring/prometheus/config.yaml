@@ -18,6 +18,12 @@ data:
         static_configs:
           - targets: ['localhost:9090']
 
+      - job_name: 'postgresql-cluster'
+        static_configs:
+          - targets: ['postgres-cluster-metrics.postgres-system.svc.cluster.local:9187']
+        scrape_interval: 30s
+        metrics_path: /metrics
+
       - job_name: 'kubernetes-apiservers'
         kubernetes_sd_configs:
         - role: endpoints
