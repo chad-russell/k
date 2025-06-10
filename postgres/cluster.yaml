@@ -40,7 +40,7 @@ spec:
   postgresql:
     parameters:
       # Performance tuning
-      shared_preload_libraries: "pg_stat_statements"
+      # shared_preload_libraries: "pg_stat_statements" # Managed by CloudNativePG
       max_connections: "200"
       shared_buffers: "256MB"
       effective_cache_size: "1GB"
@@ -63,7 +63,7 @@ spec:
       wal_level: "replica"
       max_wal_senders: "10"
       max_replication_slots: "10"
-      hot_standby: "on"
+      # hot_standby: "on" # Managed by CloudNativePG
 
   # Monitoring - removed monitoring.enabled as it's not supported in this version
 
