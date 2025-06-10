@@ -25,7 +25,7 @@ spec:
                 name: paperless-ngx-secrets
           env:
             - name: PAPERLESS_URL
-              value: "http://paperless.yourdomain.com" # We'll set up ingress
+              value: "https://paperless.internal.crussell.io"
           volumeMounts:
             - name: paperless-data
               mountPath: /usr/src/paperless/data
