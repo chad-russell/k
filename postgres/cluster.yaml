@@ -94,39 +94,3 @@ spec:
   affinity:
     enablePodAntiAffinity: true
     topologyKey: kubernetes.io/hostname
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: postgres-cluster-rw
-  namespace: postgres-system
-  labels:
-    app: postgres-cluster
-spec:
-  type: ClusterIP
-  ports:
-    - port: 5432
-      targetPort: 5432
-      protocol: TCP
-      name: postgres
-  selector:
-    postgresql: postgres-cluster
-    role: primary
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: postgres-cluster-ro
-  namespace: postgres-system
-  labels:
-    app: postgres-cluster
-spec:
-  type: ClusterIP
-  ports:
-    - port: 5432
-      targetPort: 5432
-      protocol: TCP
-      name: postgres
-  selector:
-    postgresql: postgres-cluster
-    role: replica
