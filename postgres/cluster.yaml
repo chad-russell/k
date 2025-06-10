@@ -88,10 +88,9 @@ spec:
 
   # Failover configuration
   failoverDelay: 0
-  switchoverDelay:
-    40s
+  switchoverDelay: 40
 
-    # Node affinity to spread instances across nodes - using simplified format
+  # Node affinity to spread instances across nodes - using simplified format
   affinity:
     enablePodAntiAffinity: true
     topologyKey: kubernetes.io/hostname
