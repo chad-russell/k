@@ -19,10 +19,31 @@ data:
           - targets: ['localhost:9090']
 
       - job_name: 'postgresql-cluster'
-        static_configs:
-          - targets: ['postgres-cluster-metrics.postgres-system.svc.cluster.local:9187']
-        scrape_interval: 30s
-        metrics_path: /metrics
+        kubernetes_sd_configs:
+        - role: pod
+          namespaces:
+            names:
+            - postgres-system
+        relabel_configs:
+        - source_labels: [__meta_kubernetes_pod_label_cnpg_io_cluster]
+          action: keep
+          regex: postgres-cluster
+        - source_labels: [__meta_kubernetes_pod_container_port_number]
+          action: keep
+          regex: '9187'
+        - source_labels: [__address__]
+          action: replace
+          target_label: __address__
+          regex: ([^:]+)(?::\d+)?
+          replacement: $1:9187
+        - action: labelmap
+          regex: __meta_kubernetes_pod_label_(.+)
+        - source_labels: [__meta_kubernetes_namespace]
+          action: replace
+          target_label: kubernetes_namespace
+        - source_labels: [__meta_kubernetes_pod_name]
+          action: replace
+          target_label: kubernetes_pod_name
 
       - job_name: 'kubernetes-apiservers'
         kubernetes_sd_configs:
