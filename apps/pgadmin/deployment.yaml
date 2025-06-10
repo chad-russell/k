@@ -25,7 +25,7 @@ spec:
               name: http
           env:
             - name: PGADMIN_DEFAULT_EMAIL
-              value: "admin@localhost.local"
+              value: "admin@example.com"
             - name: PGADMIN_DEFAULT_PASSWORD
               value: "pgadmin123!"
             - name: PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION
