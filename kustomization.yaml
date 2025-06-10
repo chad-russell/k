@@ -13,5 +13,8 @@ resources:
   # Applications
   - ./apps
 
+  # Database
+  - ./postgres
+
   # Secrets - load last
   - ./secrets

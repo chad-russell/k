@@ -1,23 +1,38 @@
 # TODO: k3s Cluster Improvements & Next Steps
 
-## 1. Infrastructure & Configuration Management
+## 1. Infrastructure & Configuration Management ✅ COMPLETED
 
-- [ ] **Capture current Longhorn configuration in YAML**
+- [x] **Capture current Longhorn configuration in YAML**
   - Export as much of the current Longhorn setup as possible (volumes, settings, etc.)
   - Store in version control for reproducibility and disaster recovery
-- [ ] **Adopt Helm Secrets for sensitive values**
+- [x] **Adopt Helm Secrets for sensitive values**
   - Store Route53 credentials and ACME email securely using Helm Secrets or SOPS
   - Remove all hardcoded secrets from versioned YAML
-- [ ] **Move toward GitOps for cluster management**
+- [x] **Move toward GitOps for cluster management**
   - Use tools like ArgoCD or Flux to manage cluster state from Git
   - Integrate Helm Secrets into GitOps workflow
+
+**Status**: All infrastructure and GitOps foundations are complete. Flux is managing the cluster declaratively with SOPS encryption for secrets, Longhorn is providing HA storage, and Traefik ingress controller is deployed and working.
 
 ## 2. Core Services
 
 - [ ] **Stand up a highly available Postgres database**
-  - Use a Helm chart or operator (e.g., Zalando, CrunchyData, Bitnami)
   - Ensure data is stored on Longhorn volumes for HA and backup
   - Configure backups and monitoring
+  - Would you like me to help you create the CloudNativePG configuration? Here's what we'd do:
+    - Create a postgres directory in your repo
+    - Configure the CloudNativePG operator via Helm
+    - Set up a PostgreSQL cluster with HA configuration
+    - Encrypt database credentials with SOPS
+    - Configure backups to Longhorn volumes or S3
+    - Add monitoring integration
+    - The setup would give you:
+    - Primary + 2 replicas for true HA
+    - Automatic failover (< 30 seconds)
+    - Read-only replicas for performance
+    - Connection pooling for efficiency
+    - Encrypted backups with point-in-time recovery
+    - Would you like me to start setting this up? I can create the configuration files and walk you through the deployment!
 
 ## 3. Applications & Data Migration
 

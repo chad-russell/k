@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pgadmin-config
+  namespace: pgadmin
+data:
+  servers.json: |
+    {
+      "Servers": {
+        "1": {
+          "Name": "PostgreSQL HA Cluster",
+          "Group": "k3s Cluster",
+          "Host": "postgres-cluster-rw.postgres-system.svc.cluster.local",
+          "Port": 5432,
+          "MaintenanceDB": "app_db",
+          "Username": "app_user",
+          "SSLMode": "prefer",
+          "Comment": "High Availability PostgreSQL Cluster - Read/Write"
+        },
+        "2": {
+          "Name": "PostgreSQL HA Cluster (Read-Only)",
+          "Group": "k3s Cluster", 
+          "Host": "postgres-cluster-ro.postgres-system.svc.cluster.local",
+          "Port": 5432,
+          "MaintenanceDB": "app_db",
+          "Username": "app_user",
+          "SSLMode": "prefer",
+          "Comment": "High Availability PostgreSQL Cluster - Read-Only Replicas"
+        }
+      }
+    }

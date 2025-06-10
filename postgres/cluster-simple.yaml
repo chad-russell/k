@@ -1,0 +1,90 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgres-cluster
+  namespace: postgres-system
+spec:
+  # 3 instances for true HA (1 primary + 2 replicas)
+  instances: 3
+
+  # PostgreSQL version
+  imageName: ghcr.io/cloudnative-pg/postgresql:16.1
+
+  # Bootstrap configuration
+  bootstrap:
+    initdb:
+      database: app_db
+      owner: app_user
+      secret:
+        name: postgres-credentials
+
+  # Superuser secret
+  superuserSecret:
+    name: postgres-credentials
+
+  # Storage configuration using Longhorn
+  storage:
+    size: 20Gi
+    storageClass: longhorn
+
+  # Resource limits
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "500m"
+    limits:
+      memory: "1Gi"
+      cpu: "1000m"
+
+  # PostgreSQL configuration
+  postgresql:
+    parameters:
+      # Performance tuning
+      max_connections: "200"
+      shared_buffers: "256MB"
+      effective_cache_size: "1GB"
+      maintenance_work_mem: "64MB"
+
+      # Logging
+      log_min_duration_statement: "1000"
+      log_checkpoints: "on"
+      log_connections: "on"
+      log_disconnections: "on"
+
+      # Replication parameters are managed by CloudNativePG
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-cluster-rw
+  namespace: postgres-system
+  labels:
+    app: postgres-cluster
+spec:
+  type: ClusterIP
+  ports:
+    - port: 5432
+      targetPort: 5432
+      protocol: TCP
+      name: postgres
+  selector:
+    postgresql: postgres-cluster
+    role: primary
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-cluster-ro
+  namespace: postgres-system
+  labels:
+    app: postgres-cluster
+spec:
+  type: ClusterIP
+  ports:
+    - port: 5432
+      targetPort: 5432
+      protocol: TCP
+      name: postgres
+  selector:
+    postgresql: postgres-cluster
+    role: replica
