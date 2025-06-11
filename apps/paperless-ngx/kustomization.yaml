@@ -5,5 +5,7 @@ resources:
   - namespace.yaml
   - secrets.yaml
   - redis.yaml
+  - gotenberg.yaml
+  - tika.yaml
   - deployment.yaml
   - ingress.yaml
