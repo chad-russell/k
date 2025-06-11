@@ -23,9 +23,7 @@ spec:
         cert-manager.io/cluster-issuer: "letsencrypt-prod" # Adjust if needed
       hosts:
         - host: n8n.local # Change this to your domain
-          paths:
-            - path: /
-              pathType: Prefix
+          paths: []
       tls:
         - secretName: n8n-tls
           hosts:
