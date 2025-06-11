@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - grafana.yaml
   - config.yaml
+  - ingress.yaml
