@@ -25,9 +25,15 @@ spec:
               name: http
           env:
             - name: PGADMIN_DEFAULT_EMAIL
-              value: "admin@example.com"
+              valueFrom:
+                secretKeyRef:
+                  name: pgadmin-credentials
+                  key: email
             - name: PGADMIN_DEFAULT_PASSWORD
-              value: "pgadmin123!"
+              valueFrom:
+                secretKeyRef:
+                  name: pgadmin-credentials
+                  key: password
             - name: PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION
               value: "True"
             - name: PGADMIN_CONFIG_LOGIN_BANNER
