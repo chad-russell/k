@@ -16,7 +16,7 @@
 
 ## 2. Core Services
 
-- [ ] **Stand up a highly available Postgres database**
+- [x] **Stand up a highly available Postgres database**
   - Ensure data is stored on Longhorn volumes for HA and backup
   - Configure backups and monitoring
   - Would you like me to help you create the CloudNativePG configuration? Here's what we'd do:
@@ -36,10 +36,10 @@
 
 ## 3. Applications & Data Migration
 
-- [ ] **Install paperless-ngx via Helm or manifests**
+- [x] **Install paperless-ngx via Helm or manifests**
   - Deploy in the cluster, using Longhorn for persistent storage
   - Configure ingress, secrets, and environment variables securely
-- [ ] **Migrate data from old Docker-based paperless-ngx**
+- [x] **Migrate data from old Docker-based paperless-ngx**
   - Plan and execute data migration to the new cluster
   - Validate data integrity and application functionality
 
