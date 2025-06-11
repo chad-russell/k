@@ -15,17 +15,7 @@ data:
           "MaintenanceDB": "app_db",
           "Username": "app_user",
           "SSLMode": "prefer",
-          "Comment": "High Availability PostgreSQL Cluster - Read/Write"
-        },
-        "2": {
-          "Name": "PostgreSQL HA Cluster (Read-Only)",
-          "Group": "k3s Cluster", 
-          "Host": "postgres-cluster-ro.postgres-system.svc.cluster.local",
-          "Port": 5432,
-          "MaintenanceDB": "app_db",
-          "Username": "app_user",
-          "SSLMode": "prefer",
-          "Comment": "High Availability PostgreSQL Cluster - Read-Only Replicas"
+          "Comment": "High Availability PostgreSQL Cluster - Read/Write (handles both read and write operations)"
         }
       }
     }
