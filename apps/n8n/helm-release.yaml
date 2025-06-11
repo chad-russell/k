@@ -8,21 +8,13 @@ spec:
   chart:
     spec:
       chart: n8n
-      version: "0.23.0"
+      version: "1.0.7"
       sourceRef:
         kind: HelmRepository
         name: n8n
         namespace: n8n
       interval: 15m
   values:
-    # Basic configuration
-    replicaCount: 1
-
-    # Service configuration
-    service:
-      type: ClusterIP
-      port: 5678
-
     # Ingress configuration (adjust domain to match your setup)
     ingress:
       enabled: true
@@ -39,29 +31,39 @@ spec:
           hosts:
             - n8n.local # Change this to your domain
 
-    # Persistence for workflows and data
-    persistence:
-      enabled: true
-      storageClass: "longhorn" # Using your Longhorn storage
-      accessMode: ReadWriteOnce
-      size: 10Gi
+    # Main n8n application configuration
+    main:
+      # Basic configuration
+      replicaCount: 1
 
-    # Environment variables
-    env:
-      - name: N8N_HOST
-        value: "n8n.local" # Change this to your domain
-      - name: N8N_PORT
-        value: "5678"
-      - name: N8N_PROTOCOL
-        value: "https"
-      - name: WEBHOOK_URL
-        value: "https://n8n.local" # Change this to your domain
+      # n8n specific configuration
+      config:
+        n8n:
+          host: "n8n.local" # Change this to your domain
+          port: 5678
+          protocol: "https"
+        webhook:
+          url: "https://n8n.local" # Change this to your domain
 
-    # Resource limits (adjust based on your needs)
-    resources:
-      limits:
-        cpu: 1000m
-        memory: 1Gi
-      requests:
-        cpu: 500m
-        memory: 512Mi
+      # Service configuration
+      service:
+        type: ClusterIP
+        port: 80
+
+      # Persistence for workflows and data
+      persistence:
+        enabled: true
+        type: dynamic
+        storageClass: "longhorn" # Using your Longhorn storage
+        accessModes:
+          - ReadWriteOnce
+        size: 10Gi
+
+      # Resource limits (adjust based on your needs)
+      resources:
+        limits:
+          cpu: 1000m
+          memory: 1Gi
+        requests:
+          cpu: 500m
+          memory: 512Mi
