@@ -15,19 +15,9 @@ spec:
         namespace: n8n
       interval: 15m
   values:
-    # Ingress configuration (adjust domain to match your setup)
+    # Disable built-in ingress - we'll use Traefik IngressRoute instead
     ingress:
-      enabled: true
-      className: "nginx" # Adjust if you use a different ingress class
-      annotations:
-        cert-manager.io/cluster-issuer: "letsencrypt-prod" # Adjust if needed
-      hosts:
-        - host: n8n.local # Change this to your domain
-          paths: []
-      tls:
-        - secretName: n8n-tls
-          hosts:
-            - n8n.local # Change this to your domain
+      enabled: false
 
     # Main n8n application configuration
     main:
@@ -37,11 +27,11 @@ spec:
       # n8n specific configuration
       config:
         n8n:
-          host: "n8n.local" # Change this to your domain
+          host: "n8n.k3s.crussell.io" # Change this to your domain
           port: 5678
           protocol: "https"
         webhook:
-          url: "https://n8n.local" # Change this to your domain
+          url: "https://n8n.k3s.crussell.io" # Change this to your domain
 
       # Service configuration
       service:
