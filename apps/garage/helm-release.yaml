@@ -7,7 +7,7 @@ spec:
   interval: 15m
   chart:
     spec:
-      chart: contrib/helm/garage
+      chart: script/helm/garage
       sourceRef:
         kind: GitRepository
         name: garage
