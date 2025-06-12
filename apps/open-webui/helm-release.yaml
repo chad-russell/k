@@ -37,36 +37,24 @@ spec:
     # Open WebUI specific configuration
     env:
       # Basic configuration
-      - name: WEBUI_NAME
-        value: "Open WebUI"
-      - name: DEFAULT_LOCALE
-        value: "en-US"
+      WEBUI_NAME: "Open WebUI"
+      DEFAULT_LOCALE: "en-US"
 
       # Security settings
-      - name: ENABLE_SIGNUP
-        value: "true"
-      - name: DEFAULT_USER_ROLE
-        value: "pending"
+      ENABLE_SIGNUP: "true"
+      DEFAULT_USER_ROLE: "pending"
 
       # File upload settings
-      - name: ENABLE_IMAGE_GENERATION
-        value: "true"
-      - name: ENABLE_COMMUNITY_SHARING
-        value: "false"
+      ENABLE_IMAGE_GENERATION: "true"
+      ENABLE_COMMUNITY_SHARING: "false"
 
       # Database configuration (using SQLite by default)
-      - name: DATABASE_URL
-        value: "sqlite:///app/backend/data/webui.db"
+      DATABASE_URL: "sqlite:///app/backend/data/webui.db"
 
       # Optional: Configure external AI services
       # Uncomment and configure these if you have external AI services
-      # - name: OPENAI_API_BASE_URL
-      #   value: "https://api.openai.com/v1"
-      # - name: OPENAI_API_KEY
-      #   valueFrom:
-      #     secretKeyRef:
-      #       name: openai-secret
-      #       key: api-key
+      # OPENAI_API_BASE_URL: "https://api.openai.com/v1"
+      # OPENAI_API_KEY: "your-api-key-here"
 
     # Persistence for data and models
     persistence:
