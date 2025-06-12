@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: open-webui
-      version: "3.1.8"
+      version: "6.20.0"
       sourceRef:
         kind: HelmRepository
         name: open-webui
@@ -22,39 +22,23 @@ spec:
     # Main Open WebUI application configuration
     replicaCount: 1
 
-    # Image configuration
-    image:
-      repository: ghcr.io/open-webui/open-webui
-      tag: "main"
-      pullPolicy: Always
-
-    # Service configuration
-    service:
-      type: ClusterIP
-      port: 80
-      targetPort: 8080
-
     # Open WebUI specific configuration
-    env:
-      # Basic configuration
-      WEBUI_NAME: "Open WebUI"
-      DEFAULT_LOCALE: "en-US"
+    openwebui:
+      env:
+        # Basic configuration
+        WEBUI_NAME: "Open WebUI"
+        DEFAULT_LOCALE: "en-US"
 
-      # Security settings
-      ENABLE_SIGNUP: "true"
-      DEFAULT_USER_ROLE: "pending"
+        # Security settings
+        ENABLE_SIGNUP: "true"
+        DEFAULT_USER_ROLE: "pending"
 
-      # File upload settings
-      ENABLE_IMAGE_GENERATION: "true"
-      ENABLE_COMMUNITY_SHARING: "false"
+        # File upload settings
+        ENABLE_IMAGE_GENERATION: "true"
+        ENABLE_COMMUNITY_SHARING: "false"
 
-      # Database configuration (using SQLite by default)
-      DATABASE_URL: "sqlite:///app/backend/data/webui.db"
-
-      # Optional: Configure external AI services
-      # Uncomment and configure these if you have external AI services
-      # OPENAI_API_BASE_URL: "https://api.openai.com/v1"
-      # OPENAI_API_KEY: "your-api-key-here"
+        # Database configuration (using SQLite by default)
+        DATABASE_URL: "sqlite:///app/backend/data/webui.db"
 
     # Persistence for data and models
     persistence:
@@ -63,7 +47,6 @@ spec:
       accessModes:
         - ReadWriteOnce
       size: 20Gi
-      mountPath: "/app/backend/data"
 
     # Resource limits (adjust based on your needs)
     resources:
@@ -73,6 +56,12 @@ spec:
       requests:
         cpu: 500m
         memory: 1Gi
+
+    # Service configuration
+    service:
+      type: ClusterIP
+      port: 80
+      targetPort: 8080
 
     # Security context
     securityContext:
