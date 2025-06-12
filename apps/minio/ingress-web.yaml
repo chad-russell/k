@@ -1,0 +1,16 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: minio-web
+  namespace: minio
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`minio.k3s.crussell.io`)
+      kind: Rule
+      services:
+        - name: minio-external
+          port: 9002
+  tls:
+    certResolver: letsencrypt
