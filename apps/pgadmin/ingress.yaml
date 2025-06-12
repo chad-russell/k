@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`pgadmin.internal.crussell.io`)
+    - match: Host(`pgadmin.k3s.crussell.io`)
       kind: Rule
       services:
         - name: pgadmin

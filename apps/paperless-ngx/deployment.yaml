@@ -25,7 +25,7 @@ spec:
                 name: paperless-ngx-secrets
           env:
             - name: PAPERLESS_URL
-              value: "https://paperless.internal.crussell.io"
+              value: "https://paperless.k3s.crussell.io"
             - name: PAPERLESS_TIKA_ENABLED
               value: "1"
             - name: PAPERLESS_TIKA_GOTENBERG_ENDPOINT

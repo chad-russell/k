@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`grafana.internal.crussell.io`)
+    - match: Host(`grafana.k3s.crussell.io`)
       kind: Rule
       services:
         - name: grafana-service
