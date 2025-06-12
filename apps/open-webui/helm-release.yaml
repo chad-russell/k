@@ -22,6 +22,14 @@ spec:
     # Main Open WebUI application configuration
     replicaCount: 1
 
+    # Disable Ollama (we'll use external Ollama if needed)
+    ollama:
+      enabled: false
+
+    # Disable Pipelines (we'll use external services if needed)
+    pipelines:
+      enabled: false
+
     # Open WebUI specific configuration
     openwebui:
       env:
