@@ -1,0 +1,95 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: ntfy
+  namespace: ntfy
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: ntfy
+      version: "0.1.0"
+      sourceRef:
+        kind: HelmRepository
+        name: ntfy
+        namespace: ntfy
+      interval: 15m
+  values:
+    # Disable built-in ingress - we'll use Traefik IngressRoute instead
+    ingress:
+      enabled: false
+
+    # Main ntfy application configuration
+    replicaCount: 1
+
+    # Image configuration
+    image:
+      repository: binwiederhier/ntfy
+      tag: "v2.11.0"
+      pullPolicy: IfNotPresent
+
+    # Service configuration
+    service:
+      type: ClusterIP
+      port: 80
+      targetPort: 80
+
+    # ntfy specific configuration
+    config:
+      # Base URL for the ntfy server
+      base-url: "https://ntfy.k3s.crussell.io" # Change this to your domain
+
+      # Listen address and port
+      listen-http: ":80"
+
+      # Cache settings
+      cache-file: "/var/cache/ntfy/cache.db"
+      cache-duration: "12h"
+
+      # Authentication (optional - you can enable this later)
+      # auth-file: "/var/lib/ntfy/user.db"
+      # auth-default-access: "deny-all"
+
+      # Attachment settings
+      attachment-cache-dir: "/var/cache/ntfy/attachments"
+      attachment-total-size-limit: "5G"
+      attachment-file-size-limit: "15M"
+      attachment-expiry-duration: "3h"
+
+      # Rate limiting
+      visitor-request-limit-burst: 60
+      visitor-request-limit-replenish: "5s"
+      visitor-email-limit-burst: 16
+      visitor-email-limit-replenish: "1h"
+
+      # Behind proxy settings (for Traefik)
+      behind-proxy: true
+
+    # Persistence for cache and attachments
+    persistence:
+      enabled: true
+      storageClass: "longhorn" # Using your Longhorn storage
+      accessModes:
+        - ReadWriteOnce
+      size: 5Gi
+      mountPath: "/var/cache/ntfy"
+
+    # Resource limits (adjust based on your needs)
+    resources:
+      limits:
+        cpu: 500m
+        memory: 512Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+
+    # Security context
+    securityContext:
+      runAsNonRoot: true
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000
+
+    # Pod security context
+    podSecurityContext:
+      fsGroup: 1000

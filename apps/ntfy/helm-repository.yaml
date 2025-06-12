@@ -1,0 +1,9 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: ntfy
+  namespace: ntfy
+spec:
+  interval: 1h
+  type: oci
+  url: oci://codeberg.org/wrenix/helm-charts
