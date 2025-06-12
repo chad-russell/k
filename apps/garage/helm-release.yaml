@@ -7,10 +7,9 @@ spec:
   interval: 15m
   chart:
     spec:
-      chart: garage
-      version: "0.9.3"
+      chart: contrib/helm/garage
       sourceRef:
-        kind: HelmRepository
+        kind: GitRepository
         name: garage
         namespace: garage
       interval: 15m
