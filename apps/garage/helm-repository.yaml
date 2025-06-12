@@ -5,4 +5,4 @@ metadata:
   namespace: garage
 spec:
   interval: 1h
-  url: https://garagehq.github.io/garage/helm-charts/
+  url: https://charts.deuxfleurs.fr/
