@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: garage
+  namespace: garage
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+    - host: garage.k3s.crussell.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: garage
+                port:
+                  number: 3900
