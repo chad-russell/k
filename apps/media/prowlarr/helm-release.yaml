@@ -64,7 +64,6 @@ spec:
               capabilities:
                 drop:
                   - ALL
-              readOnlyRootFilesystem: true
 
     service:
       app:
