@@ -47,7 +47,6 @@ data:
 
     additionalArguments:
       - "--api.dashboard=true"
-      - "--log.level=DEBUG"
 
     envFrom:
       - secretRef:
