@@ -18,7 +18,7 @@ data:
     # Persistent storage for ACME certificates
     persistence:
       enabled: true
-      name: data
+      name: traefik
       size: 128Mi
       storageClass: "longhorn"
       accessModes:
