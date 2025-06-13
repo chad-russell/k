@@ -3,6 +3,6 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - helm-repository.yaml
-  - forgejo-db-secret.yaml
+  - secrets.yaml
   - helm-release.yaml
   - ingress.yaml
