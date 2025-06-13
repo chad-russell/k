@@ -65,6 +65,11 @@ spec:
                 drop:
                   - ALL
 
+    defaultPodOptions:
+      securityContext:
+        fsGroup: 65534 # nobody group
+        fsGroupChangePolicy: OnRootMismatch
+
     service:
       app:
         controller: prowlarr
