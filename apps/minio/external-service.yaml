@@ -7,8 +7,8 @@ spec:
   type: ClusterIP
   ports:
     - name: web
-      port: 9001
-      targetPort: 9001
+      port: 9002
+      targetPort: 9002
     - name: api
       port: 9000
       targetPort: 9000
@@ -23,6 +23,6 @@ subsets:
       - ip: 192.168.20.31
     ports:
       - name: web
-        port: 9001
+        port: 9002
       - name: api
         port: 9000
