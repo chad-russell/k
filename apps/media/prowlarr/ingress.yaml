@@ -1,16 +1,14 @@
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: hello-world
-  namespace: default
+  name: prowlarr
+  namespace: media
 spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`hello-k3s.crussell.io`)
+    - match: Host(`prowlarr.k3s.crussell.io`)
       kind: Rule
       services:
-        - name: hello-world
+        - name: prowlarr
           port: 80
-  tls:
-    certResolver: letsencrypt

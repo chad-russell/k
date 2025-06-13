@@ -1,0 +1,83 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: prowlarr
+  namespace: media
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: "3.7.3"
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: media
+      interval: 15m
+  values:
+    controllers:
+      prowlarr:
+        containers:
+          app:
+            image:
+              repository: ghcr.io/home-operations/prowlarr
+              tag: "1.36.2.5059"
+            env:
+              TZ: "America/New_York" # Change to your timezone
+              PROWLARR__SERVER__PORT: "80"
+              PROWLARR__AUTH__METHOD: "External"
+              PROWLARR__AUTH__REQUIRED: "DisabledForLocalAddresses"
+              PROWLARR__APP__THEME: "dark"
+              PROWLARR__LOG__LEVEL: "info"
+              PROWLARR__APP__INSTANCENAME: "Prowlarr"
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                memory: 1Gi
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /ping
+                    port: 80
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /ping
+                    port: 80
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+              readOnlyRootFilesystem: true
+
+    service:
+      app:
+        controller: prowlarr
+        ports:
+          http:
+            port: 80
+
+    persistence:
+      config:
+        enabled: true
+        type: persistentVolumeClaim
+        storageClass: "longhorn" # Using your Longhorn storage
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        retain: true
