@@ -21,6 +21,8 @@ data:
       name: data
       size: 128Mi
       storageClass: "longhorn"
+      accessModes:
+        - ReadWriteMany
       path: /data
       annotations: {}
 
