@@ -1,0 +1,94 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: sonarr
+  namespace: media
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: "3.7.3"
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: media
+      interval: 15m
+  values:
+    controllers:
+      sonarr:
+        containers:
+          app:
+            image:
+              repository: ghcr.io/home-operations/sonarr
+              tag: "4.0.10.2544"
+            env:
+              TZ: "America/New_York" # Change to your timezone
+              SONARR__SERVER__PORT: "80"
+              SONARR__AUTH__METHOD: "External"
+              SONARR__AUTH__REQUIRED: "DisabledForLocalAddresses"
+              SONARR__APP__THEME: "dark"
+              SONARR__LOG__LEVEL: "info"
+              SONARR__APP__INSTANCENAME: "Sonarr"
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                memory: 1Gi
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /ping
+                    port: 80
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /ping
+                    port: 80
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+
+    defaultPodOptions:
+      securityContext:
+        fsGroup: 65534 # nobody group
+        fsGroupChangePolicy: OnRootMismatch
+
+    service:
+      app:
+        controller: sonarr
+        ports:
+          http:
+            port: 80
+
+    persistence:
+      config:
+        enabled: true
+        type: persistentVolumeClaim
+        storageClass: "longhorn" # Using your Longhorn storage
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        retain: true
+        globalMounts:
+          - path: /config
+      tmp:
+        enabled: true
+        type: emptyDir
+        globalMounts:
+          - path: /tmp
