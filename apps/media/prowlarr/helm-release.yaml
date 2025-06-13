@@ -81,3 +81,10 @@ spec:
         accessMode: ReadWriteOnce
         size: 1Gi
         retain: true
+        globalMounts:
+          - path: /config
+      tmp:
+        enabled: true
+        type: emptyDir
+        globalMounts:
+          - path: /tmp
