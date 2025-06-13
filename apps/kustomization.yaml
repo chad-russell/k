@@ -10,3 +10,4 @@ resources:
   - open-webui/
   - minio/
   - traefik/
+  - it-tools/
