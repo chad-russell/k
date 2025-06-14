@@ -20,8 +20,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/home-operations/sonarr
-              tag: "4.0.10.2544"
+              repository: ghcr.io/onedr0p/sonarr
+              tag: "rolling"
             env:
               TZ: "America/New_York" # Change to your timezone
               SONARR__SERVER__PORT: "80"

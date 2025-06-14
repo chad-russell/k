@@ -20,8 +20,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/home-operations/radarr
-              tag: "5.14.0.9383"
+              repository: ghcr.io/onedr0p/radarr
+              tag: "rolling"
             env:
               TZ: "America/New_York" # Change to your timezone
               RADARR__SERVER__PORT: "80"
