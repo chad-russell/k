@@ -1,0 +1,17 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: nas
+  namespace: external-services
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`nas.k3s.crussell.io`)
+      kind: Rule
+      services:
+        - name: nas-external
+          port: 443
+          scheme: https
+  tls:
+    certResolver: letsencrypt 
