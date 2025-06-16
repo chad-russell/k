@@ -20,4 +20,18 @@ spec:
         namespace: cert-manager
     extraArgs:
       - --dns01-recursive-nameservers-only
-      - --dns01-recursive-nameservers=8.8.8.8:53,1.1.1.1:53 
+      - --dns01-recursive-nameservers=8.8.8.8:53,1.1.1.1:53
+    # Force cert-manager to use public DNS instead of cluster DNS
+    dnsPolicy: "None"
+    dnsConfig:
+      nameservers:
+        - "8.8.8.8"
+        - "1.1.1.1"
+      searches:
+        - "cert-manager.svc.cluster.local"
+        - "svc.cluster.local"
+        - "cluster.local"
+      options:
+        - name: ndots
+          value: "2"
+        - name: edns0 
