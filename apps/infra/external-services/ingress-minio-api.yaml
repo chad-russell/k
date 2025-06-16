@@ -14,4 +14,4 @@ spec:
           port: 9000
           scheme: http
   tls:
-    secretName: internal-crussell-io-tls
+    certResolver: letsencrypt 

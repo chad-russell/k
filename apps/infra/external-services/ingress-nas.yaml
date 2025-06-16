@@ -26,7 +26,7 @@ spec:
         - name: nas-external
           port: 80
   tls:
-    secretName: internal-crussell-io-tls
+    certResolver: letsencrypt 
 ---
 apiVersion: traefik.io/v1alpha1
 kind: Middleware

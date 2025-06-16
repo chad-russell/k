@@ -13,4 +13,4 @@ spec:
         - name: minio-external
           port: 9002
   tls:
-    secretName: internal-crussell-io-tls
+    certResolver: letsencrypt 

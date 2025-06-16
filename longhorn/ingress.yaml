@@ -7,10 +7,10 @@ spec:
   entryPoints:
     - websecure
   routes:
-  tls:
-    certResolver: letsencrypt
     - match: Host(`longhorn.internal.crussell.io`)
       kind: Rule
       services:
         - name: longhorn-frontend
           port: 80
+  tls:
+    certResolver: letsencrypt

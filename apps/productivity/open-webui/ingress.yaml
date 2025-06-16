@@ -7,10 +7,10 @@ spec:
   entryPoints:
     - websecure
   routes:
-  tls:
-    certResolver: letsencrypt
     - match: Host(`open-webui.internal.crussell.io`) # Change this to your domain
       kind: Rule
       services:
         - name: open-webui
           port: 80
+  tls:
+    certResolver: letsencrypt

@@ -7,10 +7,10 @@ spec:
   entryPoints:
     - websecure
   routes:
-  tls:
-    certResolver: letsencrypt
-    - match: Host(`ntfy.internal.crussell.io`) # Change this to your domain
+    - match: Host(`ntfy.internal.crussell.io`)
       kind: Rule
       services:
         - name: ntfy
           port: 80
+  tls:
+    certResolver: letsencrypt
