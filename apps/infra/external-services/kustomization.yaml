@@ -10,6 +10,10 @@ resources:
   - external-nas.yaml
   - ingress-nas.yaml
 
+  # Proxmox
+  - external-proxmox.yaml
+  - ingress-proxmox.yaml
+
   # MinIO
   - external-minio.yaml
   - ingress-minio-api.yaml
