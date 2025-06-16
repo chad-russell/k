@@ -22,11 +22,16 @@ spec:
       - --dns01-recursive-nameservers-only
       - --dns01-recursive-nameservers=8.8.8.8:53,1.1.1.1:53
       - --v=4
-    
-    # Use host networking to bypass NAT rule
-    hostNetwork: true
-    dnsPolicy: "ClusterFirstWithHostNet"
-    
-    # Remove the custom DNS config since we're using host networking
-    # podDnsPolicy: "None"
-    # podDnsConfig: ... 
+    podDnsPolicy: "None"
+    podDnsConfig:
+      nameservers:
+        - "8.8.8.8"
+        - "1.1.1.1"
+      searches:
+        - "cert-manager.svc.cluster.local"
+        - "svc.cluster.local"
+        - "cluster.local"
+      options:
+        - name: ndots
+          value: "2"
+        - name: edns0 
