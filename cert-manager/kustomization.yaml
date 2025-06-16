@@ -8,3 +8,4 @@ resources:
   - release.yaml
   - secrets.yaml
   - cluster-issuer.yaml
+  - wildcard-certificate.yaml
