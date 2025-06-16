@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`jellyseerr.internal.crussell.io`)
+    - match: Host(`jellyseerr.crussell.io`)
       kind: Rule
       services:
         - name: jellyseerr
