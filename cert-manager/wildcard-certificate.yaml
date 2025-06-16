@@ -9,5 +9,4 @@ spec:
     name: letsencrypt-dns
     kind: ClusterIssuer
   dnsNames:
-  - "*.internal.crussell.io"
-  - "internal.crussell.io"  # Include the root domain too 
+  - "*.internal.crussell.io" 
