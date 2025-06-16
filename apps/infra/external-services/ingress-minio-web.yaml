@@ -5,12 +5,10 @@ metadata:
   namespace: external-services
 spec:
   entryPoints:
-    - websecure
+    - web
   routes:
     - match: Host(`minio.internal.crussell.io`)
       kind: Rule
       services:
         - name: minio-external
           port: 9002
-  tls:
-    certResolver: letsencrypt

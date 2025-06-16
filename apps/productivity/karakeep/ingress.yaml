@@ -5,12 +5,10 @@ metadata:
   namespace: karakeep
 spec:
   entryPoints:
-    - websecure
+    - web
   routes:
     - match: Host(`karakeep.internal.crussell.io`)
       kind: Rule
       services:
         - name: karakeep
           port: 3000
-  tls:
-    certResolver: letsencrypt

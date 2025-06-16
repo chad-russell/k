@@ -5,12 +5,10 @@ metadata:
   namespace: traefik
 spec:
   entryPoints:
-    - websecure
+    - web
   routes:
     - match: Host(`traefik.internal.crussell.io`)
       kind: Rule
       services:
         - name: api@internal
           kind: TraefikService
-  tls:
-    certResolver: letsencrypt

@@ -5,7 +5,7 @@ metadata:
   namespace: external-services
 spec:
   entryPoints:
-    - websecure
+    - web
   routes:
     - match: Host(`s3.internal.crussell.io`)
       kind: Rule
@@ -13,5 +13,3 @@ spec:
         - name: minio-external
           port: 9000
           scheme: http
-  tls:
-    certResolver: letsencrypt

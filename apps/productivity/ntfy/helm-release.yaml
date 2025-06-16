@@ -37,7 +37,7 @@ spec:
     # ntfy specific configuration
     config:
       # Base URL for the ntfy server
-      base-url: "https://ntfy.internal.crussell.io" # Change this to your domain
+      base-url: "http://ntfy.internal.crussell.io" # Change this to your domain
 
       # Listen address and port
       listen-http: ":80"

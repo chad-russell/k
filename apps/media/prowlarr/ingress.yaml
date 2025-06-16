@@ -5,12 +5,10 @@ metadata:
   namespace: media
 spec:
   entryPoints:
-    - websecure
+    - web
   routes:
     - match: Host(`prowlarr.internal.crussell.io`)
       kind: Rule
       services:
         - name: prowlarr
           port: 80
-  tls:
-    certResolver: letsencrypt

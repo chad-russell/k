@@ -5,12 +5,10 @@ metadata:
   namespace: pgadmin
 spec:
   entryPoints:
-    - websecure
+    - web
   routes:
     - match: Host(`pgadmin.internal.crussell.io`)
       kind: Rule
       services:
         - name: pgadmin
           port: 80
-  tls:
-    certResolver: letsencrypt

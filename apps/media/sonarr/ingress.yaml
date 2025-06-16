@@ -5,12 +5,10 @@ metadata:
   namespace: media
 spec:
   entryPoints:
-    - websecure
+    - web
   routes:
-    - match: Host(`sonarr.internal.crussell.io`) # Change this to your domain
+    - match: Host(`sonarr.internal.crussell.io`)
       kind: Rule
       services:
         - name: sonarr
           port: 80
-  tls:
-    certResolver: letsencrypt

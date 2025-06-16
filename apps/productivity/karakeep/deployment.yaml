@@ -28,7 +28,7 @@ spec:
                   name: karakeep-secrets
                   key: nextauth-secret
             - name: NEXTAUTH_URL
-              value: "https://karakeep.internal.crussell.io"
+              value: "http://karakeep.internal.crussell.io"
             - name: MEILI_ADDR
               value: "http://meilisearch:7700"
             - name: MEILI_MASTER_KEY
