@@ -82,8 +82,4 @@ data:
         - name: ndots
           value: "2"
 
-    # TLS configuration for internal services
-    tlsStore:
-      default:
-        defaultCertificate:
-          secretName: internal-crussell-io-tls
+

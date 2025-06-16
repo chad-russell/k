@@ -10,6 +10,9 @@ resources:
   - ./metallb
   - ./longhorn
 
+  # Certificate Management
+  - ./cert-manager
+
   # Ingress Controller
   - ./ingress
 
