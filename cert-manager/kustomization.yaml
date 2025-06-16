@@ -7,4 +7,4 @@ resources:
   - source.yaml
   - release.yaml
   - secrets.yaml
-  # - cluster-issuer.yaml  # Will add back after cert-manager is installed 
+  - cluster-issuer.yaml
