@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: sonarr
+  name: jackett
   namespace: media
 spec:
   interval: 15m
@@ -16,20 +16,15 @@ spec:
       interval: 15m
   values:
     controllers:
-      sonarr:
+      jackett:
         containers:
           app:
             image:
-              repository: ghcr.io/home-operations/sonarr
+              repository: ghcr.io/home-operations/jackett
               tag: "rolling"
             env:
               TZ: "America/New_York" # Change to your timezone
-              SONARR__SERVER__PORT: "80"
-              SONARR__AUTH__METHOD: "External"
-              SONARR__AUTH__REQUIRED: "DisabledForLocalAddresses"
-              SONARR__APP__THEME: "dark"
-              SONARR__LOG__LEVEL: "info"
-              SONARR__APP__INSTANCENAME: "Sonarr"
+              AUTO_UPDATE: "true"
             resources:
               requests:
                 cpu: 10m
@@ -42,8 +37,8 @@ spec:
                 custom: true
                 spec:
                   httpGet:
-                    path: /ping
-                    port: 80
+                    path: /
+                    port: 9117
                   initialDelaySeconds: 0
                   periodSeconds: 10
                   timeoutSeconds: 1
@@ -53,8 +48,8 @@ spec:
                 custom: true
                 spec:
                   httpGet:
-                    path: /ping
-                    port: 80
+                    path: /
+                    port: 9117
                   initialDelaySeconds: 0
                   periodSeconds: 10
                   timeoutSeconds: 1
@@ -72,10 +67,10 @@ spec:
 
     service:
       app:
-        controller: sonarr
+        controller: jackett
         ports:
           http:
-            port: 80
+            port: 9117
 
     persistence:
       config:

@@ -20,7 +20,7 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/onedr0p/radarr
+              repository: ghcr.io/home-operations/radarr
               tag: "rolling"
             env:
               TZ: "America/New_York" # Change to your timezone

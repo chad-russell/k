@@ -1,0 +1,14 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: jackett
+  namespace: media
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`jackett.internal.crussell.io`)
+      kind: Rule
+      services:
+        - name: jackett
+          port: 9117

@@ -5,5 +5,5 @@ resources:
   - sonarr/
   - radarr/
   # - qbittorrent/
-  # - jellyseerr/
-  # - jackett/
+  - jellyseerr/
+  - jackett/
