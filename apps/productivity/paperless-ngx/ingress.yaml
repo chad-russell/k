@@ -5,8 +5,10 @@ metadata:
   namespace: paperless-ngx
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
+  tls:
+    certResolver: letsencrypt
     - match: Host(`paperless.internal.crussell.io`)
       kind: Rule
       services:

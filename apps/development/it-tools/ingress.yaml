@@ -5,8 +5,10 @@ metadata:
   namespace: it-tools
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
+  tls:
+    certResolver: letsencrypt
     - match: Host(`ittools.internal.crussell.io`)
       kind: Rule
       services:

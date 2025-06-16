@@ -5,8 +5,10 @@ metadata:
   namespace: ntfy
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
+  tls:
+    certResolver: letsencrypt
     - match: Host(`ntfy.internal.crussell.io`) # Change this to your domain
       kind: Rule
       services:

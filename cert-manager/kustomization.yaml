@@ -9,3 +9,4 @@ resources:
   - secrets.yaml
   - cluster-issuer.yaml
   - wildcard-certificate.yaml
+  - reflector.yaml

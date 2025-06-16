@@ -5,8 +5,10 @@ metadata:
   namespace: longhorn-system
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
+  tls:
+    certResolver: letsencrypt
     - match: Host(`longhorn.internal.crussell.io`)
       kind: Rule
       services:

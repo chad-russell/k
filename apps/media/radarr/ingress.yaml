@@ -7,10 +7,10 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`radarr.internal.crussell.io`) # Change this to your domain
+    - match: Host(`radarr.internal.crussell.io`)
       kind: Rule
       services:
         - name: radarr
           port: 80
   tls:
-    secretName: internal-wildcard-tls
+    certResolver: letsencrypt

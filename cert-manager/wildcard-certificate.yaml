@@ -3,6 +3,12 @@ kind: Certificate
 metadata:
   name: internal-wildcard-cert
   namespace: cert-manager  # Create in cert-manager namespace for cluster-wide access
+  annotations:
+    # Reflector will sync this certificate to these namespaces
+    reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
+    reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: "media,traefik,monitoring,pgadmin,ntfy,it-tools,karakeep,paperless-ngx,longhorn-system,n8n,mealie,forgejo"
+    reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true"
+    reflector.v1.k8s.emberstack.com/reflection-auto-namespaces: "media,traefik,monitoring,pgadmin,ntfy,it-tools,karakeep,paperless-ngx,longhorn-system,n8n,mealie,forgejo"
 spec:
   secretName: internal-wildcard-tls
   issuerRef:

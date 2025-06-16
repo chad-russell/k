@@ -13,4 +13,4 @@ spec:
         - name: pgadmin
           port: 80
   tls:
-    secretName: internal-crussell-io-tls
+    certResolver: letsencrypt

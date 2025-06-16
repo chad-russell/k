@@ -5,7 +5,7 @@ metadata:
   namespace: external-services
 spec:
   entryPoints:
-    - web
+    - websecure
     - websecure
   routes:
     # Redirect root path to /ui/ at Traefik level
