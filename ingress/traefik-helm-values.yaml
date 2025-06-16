@@ -44,6 +44,13 @@ data:
             delayBeforeCheck: 0
           caServer: https://acme-v02.api.letsencrypt.org/directory
           keyType: RSA4096
+      letsencrypt-http:
+        acme:
+          storage: /data/acme-http.json
+          httpChallenge:
+            entryPoint: web
+          caServer: https://acme-v02.api.letsencrypt.org/directory
+          keyType: RSA4096
 
     additionalArguments:
       - "--api.dashboard=true"
@@ -74,3 +81,9 @@ data:
       options:
         - name: ndots
           value: "2"
+
+    # TLS configuration for internal services
+    tlsStore:
+      default:
+        defaultCertificate:
+          secretName: internal-crussell-io-tls

@@ -5,10 +5,11 @@ metadata:
   namespace: external-services
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
     - match: Host(`nas.internal.crussell.io`)
       kind: Rule
       services:
         - name: nas-external
-          port: 80 
+          port: 80
+  tls: {} 
