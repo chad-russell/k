@@ -7,10 +7,10 @@ spec:
   entryPoints:
     - websecure
   routes:
-  tls:
-    certResolver: letsencrypt
     - match: Host(`paperless.internal.crussell.io`)
       kind: Rule
       services:
         - name: paperless-ngx
           port: 8000
+  tls:
+    certResolver: letsencrypt
