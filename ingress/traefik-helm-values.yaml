@@ -64,3 +64,8 @@ data:
     # Create default IngressClass if not set
     ingressClass:
       enabled: true
+
+    dnsConfig:
+      nameservers:
+        - "8.8.8.8"  # Google DNS
+        - "1.1.1.1"  # Cloudflare DNS
