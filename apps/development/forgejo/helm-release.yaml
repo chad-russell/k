@@ -33,10 +33,10 @@ spec:
       config:
         # Server configuration
         server:
-          DOMAIN: "forgejo.k3s.crussell.io" # Change this to your domain
-          ROOT_URL: "https://forgejo.k3s.crussell.io" # Change this to your domain
+          DOMAIN: "forgejo.internal.crussell.io" # Change this to your domain
+          ROOT_URL: "https://forgejo.internal.crussell.io" # Change this to your domain
           HTTP_PORT: 3000
-          SSH_DOMAIN: "forgejo.k3s.crussell.io" # Change this to your domain
+          SSH_DOMAIN: "forgejo.internal.crussell.io" # Change this to your domain
           SSH_PORT: 22
           SSH_LISTEN_PORT: 2222 # Rootless container uses 2222
 

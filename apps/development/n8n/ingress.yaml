@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`n8n.k3s.crussell.io`) # Change this to your domain
+    - match: Host(`n8n.crussell.io`) # Change this to your domain
       kind: Rule
       services:
         - name: n8n

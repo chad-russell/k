@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`traefik.k3s.crussell.io`)
+    - match: Host(`traefik.internal.crussell.io`)
       kind: Rule
       services:
         - name: api@internal

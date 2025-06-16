@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`s3.k3s.crussell.io`)
+    - match: Host(`s3.internal.crussell.io`)
       kind: Rule
       services:
         - name: minio-external

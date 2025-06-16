@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`homeassistant.k3s.crussell.io`)
+    - match: Host(`homeassistant.crussell.io`)
       kind: Rule
       services:
         - name: homeassistant-external

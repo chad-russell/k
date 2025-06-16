@@ -22,7 +22,7 @@ spec:
             - containerPort: 9000
           env:
             - name: BASE_URL
-              value: "https://mealie.k3s.crussell.io"
+              value: "https://mealie.crussell.io"
             - name: DEFAULT_EMAIL
               value: "changeme@example.com"
             - name: DEFAULT_GROUP

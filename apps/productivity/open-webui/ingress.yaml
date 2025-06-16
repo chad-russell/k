@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`open-webui.k3s.crussell.io`) # Change this to your domain
+    - match: Host(`open-webui.internal.crussell.io`) # Change this to your domain
       kind: Rule
       services:
         - name: open-webui

@@ -27,11 +27,11 @@ spec:
       # n8n specific configuration
       config:
         n8n:
-          host: "n8n.k3s.crussell.io" # Change this to your domain
+          host: "n8n.crussell.io" # Change this to your domain
           port: 5678
           protocol: "https"
         webhook:
-          url: "https://n8n.k3s.crussell.io" # Change this to your domain
+          url: "https://n8n.crussell.io" # Change this to your domain
 
       # Service configuration
       service:

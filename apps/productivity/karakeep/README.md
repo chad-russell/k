@@ -45,7 +45,7 @@ git push
 
 ### 4. Access
 
-Once deployed, access Karakeep at: https://karakeep.k3s.crussell.io
+Once deployed, access Karakeep at: https://karakeep.internal.crussell.io
 
 ## Storage
 
