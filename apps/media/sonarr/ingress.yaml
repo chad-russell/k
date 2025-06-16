@@ -12,5 +12,3 @@ spec:
       services:
         - name: sonarr
           port: 80
-  tls:
-    certResolver: letsencrypt

@@ -12,5 +12,3 @@ spec:
       services:
         - name: open-webui
           port: 80
-  tls:
-    certResolver: letsencrypt

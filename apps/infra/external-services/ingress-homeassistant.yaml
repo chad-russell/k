@@ -13,5 +13,3 @@ spec:
         - name: homeassistant-external
           port: 8123
           scheme: http
-  tls:
-    certResolver: letsencrypt 

@@ -12,5 +12,3 @@ spec:
       services:
         - name: prowlarr
           port: 80
-  tls:
-    certResolver: letsencrypt

@@ -12,5 +12,3 @@ spec:
       services:
         - name: it-tools
           port: 80
-  tls:
-    certResolver: letsencrypt

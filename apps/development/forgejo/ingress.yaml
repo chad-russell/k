@@ -12,5 +12,3 @@ spec:
       services:
         - name: forgejo-http
           port: 80
-  tls:
-    certResolver: letsencrypt

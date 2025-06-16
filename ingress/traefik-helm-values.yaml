@@ -15,7 +15,7 @@ data:
     replicas: 3
     enableLeaderElection: true
 
-    # Persistent storage for ACME certificates
+    # Persistent storage for Traefik data
     persistence:
       enabled: true
       name: traefik
@@ -34,52 +34,19 @@ data:
       runAsNonRoot: true
       runAsUser: 65532
 
-    # Certificate resolvers for Let's Encrypt
-    certificatesResolvers:
-      letsencrypt:
-        acme:
-          storage: /data/acme.json
-          dnsChallenge:
-            provider: route53
-            delayBeforeCheck: 120
-          caServer: https://acme-v02.api.letsencrypt.org/directory
-          keyType: RSA4096
-      letsencrypt-http:
-        acme:
-          storage: /data/acme-http.json
-          httpChallenge:
-            entryPoint: web
-          caServer: https://acme-v02.api.letsencrypt.org/directory
-          keyType: RSA4096
-
     additionalArguments:
       - "--api.dashboard=true"
 
-    envFrom:
-      - secretRef:
-          name: route53-creds
-
-    # Enable the websecure entryPoint
+    # Enable entryPoints - only HTTP since OPNsense terminates SSL
     entryPoints:
       web:
         address: ":80"
-      websecure:
-        address: ":443"
       traefik:
         address: ":8080"
+      # websecure removed - OPNsense handles HTTPS
 
     # Create default IngressClass if not set
     ingressClass:
       enabled: true
-
-    # Override DNS to use public DNS servers for ACME challenges
-    dnsPolicy: "None"
-    dnsConfig:
-      nameservers:
-        - "8.8.8.8"  # Google DNS
-        - "1.1.1.1"  # Cloudflare DNS
-      options:
-        - name: ndots
-          value: "2"
 
 
