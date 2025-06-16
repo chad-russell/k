@@ -41,7 +41,7 @@ data:
           storage: /data/acme.json
           dnsChallenge:
             provider: route53
-            delayBeforeCheck: 0
+            delayBeforeCheck: 120
           caServer: https://acme-v02.api.letsencrypt.org/directory
           keyType: RSA4096
       letsencrypt-http:
