@@ -9,4 +9,3 @@ resources:
   - traefik-helm-values.yaml
   - secrets.yaml
   - release.yaml
-  - simple-traefik.yaml
