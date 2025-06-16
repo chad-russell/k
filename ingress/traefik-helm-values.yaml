@@ -65,7 +65,12 @@ data:
     ingressClass:
       enabled: true
 
+    # Override DNS to use public DNS servers for ACME challenges
+    dnsPolicy: "None"
     dnsConfig:
       nameservers:
         - "8.8.8.8"  # Google DNS
         - "1.1.1.1"  # Cloudflare DNS
+      options:
+        - name: ndots
+          value: "2"
