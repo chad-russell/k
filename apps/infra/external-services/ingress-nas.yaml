@@ -5,8 +5,8 @@ metadata:
   namespace: external-services
 spec:
   entryPoints:
-    - websecure
-    - websecure
+    - web
+    - web
   routes:
     # Redirect root path to /ui/ at Traefik level
     - match: Host(`nas.internal.crussell.io`) && Path(`/`)

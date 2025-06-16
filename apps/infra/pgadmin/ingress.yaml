@@ -5,7 +5,7 @@ metadata:
   namespace: pgadmin
 spec:
   entryPoints:
-    - websecure
+    - web
   routes:
     - match: Host(`pgadmin.internal.crussell.io`)
       kind: Rule

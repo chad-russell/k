@@ -5,7 +5,7 @@ metadata:
   namespace: forgejo
 spec:
   entryPoints:
-    - websecure
+    - web
   routes:
     - match: Host(`forgejo.internal.crussell.io`) # Change this to your domain
       kind: Rule

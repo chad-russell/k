@@ -5,7 +5,7 @@ metadata:
   namespace: mealie
 spec:
   entryPoints:
-    - websecure
+    - web
   routes:
     - match: Host(`mealie.crussell.io`)
       kind: Rule
