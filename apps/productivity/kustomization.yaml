@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
   - karakeep/
+  - linkwarden/
   - mealie/
   - ntfy/
   - open-webui/
