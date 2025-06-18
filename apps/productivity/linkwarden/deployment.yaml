@@ -1,0 +1,209 @@
+# Linkwarden Main Application
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: linkwarden
+  namespace: linkwarden
+  labels:
+    app: linkwarden
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: linkwarden
+  template:
+    metadata:
+      labels:
+        app: linkwarden
+    spec:
+      containers:
+        - name: linkwarden
+          image: ghcr.io/linkwarden/linkwarden:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NEXTAUTH_URL
+              value: "http://linkwarden.internal.crussell.io/api/v1/auth"
+            - name: NEXTAUTH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: linkwarden-secrets
+                  key: nextauth-secret
+            - name: DATABASE_URL
+              value: "postgresql://linkwarden:$(POSTGRES_PASSWORD)@postgres-cluster-rw.postgres-system.svc.cluster.local:5432/linkwarden?sslmode=require"
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: linkwarden-secrets
+                  key: postgres-password
+            - name: MEILI_HOST
+              value: "http://meilisearch:7700"
+            - name: MEILI_MASTER_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: linkwarden-secrets
+                  key: meili-master-key
+            - name: STORAGE_FOLDER
+              value: "/data/data"
+            - name: PAGINATION_TAKE_COUNT
+              value: "25"
+            - name: AUTOSCROLL_TIMEOUT
+              value: "30"
+            - name: NEXT_PUBLIC_DISABLE_REGISTRATION
+              value: "false"
+            - name: NEXT_PUBLIC_CREDENTIALS_ENABLED
+              value: "true"
+            - name: ARCHIVE_TAKE_COUNT
+              value: "10"
+            - name: BROWSER_TIMEOUT
+              value: "30000"
+            - name: TZ
+              value: "America/New_York"
+            # Uncomment if you want AI features
+            # - name: OPENAI_API_KEY
+            #   valueFrom:
+            #     secretKeyRef:
+            #       name: linkwarden-secrets
+            #       key: openai-api-key
+            # - name: OPENAI_MODEL
+            #   value: "gpt-3.5-turbo"
+          volumeMounts:
+            - name: linkwarden-data
+              mountPath: /data/data
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "200m"
+            limits:
+              memory: "2Gi"
+              cpu: "1000m"
+          livenessProbe:
+            httpGet:
+              path: /api/v1/health
+              port: 3000
+            initialDelaySeconds: 60
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /api/v1/health
+              port: 3000
+            initialDelaySeconds: 30
+            periodSeconds: 10
+      volumes:
+        - name: linkwarden-data
+          persistentVolumeClaim:
+            claimName: linkwarden-data
+---
+# MeiliSearch for Linkwarden
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: meilisearch
+  namespace: linkwarden
+  labels:
+    app: meilisearch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: meilisearch
+  template:
+    metadata:
+      labels:
+        app: meilisearch
+    spec:
+      containers:
+        - name: meilisearch
+          image: getmeili/meilisearch:v1.12.8
+          ports:
+            - containerPort: 7700
+          env:
+            - name: MEILI_MASTER_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: linkwarden-secrets
+                  key: meili-master-key
+            - name: MEILI_NO_ANALYTICS
+              value: "true"
+          volumeMounts:
+            - name: meilisearch-data
+              mountPath: /meili_data
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 7700
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 7700
+            initialDelaySeconds: 15
+            periodSeconds: 10
+      volumes:
+        - name: meilisearch-data
+          persistentVolumeClaim:
+            claimName: meilisearch-data
+---
+# Persistent Volume Claims
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: linkwarden-data
+  namespace: linkwarden
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 20Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: meilisearch-data
+  namespace: linkwarden
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 5Gi
+---
+# Services
+apiVersion: v1
+kind: Service
+metadata:
+  name: linkwarden
+  namespace: linkwarden
+  labels:
+    app: linkwarden
+spec:
+  ports:
+    - port: 3000
+      targetPort: 3000
+  selector:
+    app: linkwarden
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: meilisearch
+  namespace: linkwarden
+  labels:
+    app: meilisearch
+spec:
+  ports:
+    - port: 7700
+      targetPort: 7700
+  selector:
+    app: meilisearch
