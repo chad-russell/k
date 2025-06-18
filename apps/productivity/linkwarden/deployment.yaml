@@ -30,12 +30,10 @@ spec:
                   name: linkwarden-secrets
                   key: nextauth-secret
             - name: DATABASE_URL
-              value: "postgresql://linkwarden:$(POSTGRES_PASSWORD)@postgres-cluster-rw.postgres-system.svc.cluster.local:5432/linkwarden?sslmode=require"
-            - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: linkwarden-secrets
-                  key: postgres-password
+                  key: database-url
             - name: MEILI_HOST
               value: "http://meilisearch:7700"
             - name: MEILI_MASTER_KEY
