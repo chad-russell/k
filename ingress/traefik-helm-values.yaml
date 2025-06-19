@@ -51,5 +51,3 @@ data:
 
     # Ensure service account token is mounted for Kubernetes API access
     automountServiceAccountToken: true
-
-

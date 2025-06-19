@@ -42,12 +42,11 @@ spec:
               value: "/data"
             - name: TZ
               value: "America/New_York"
-            # Add OpenAI key if you want AI tagging
-            # - name: OPENAI_API_KEY
-            #   valueFrom:
-            #     secretKeyRef:
-            #       name: karakeep-secrets
-            #       key: openai-api-key
+            - name: OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: karakeep-secrets
+                  key: openai-api-key
           volumeMounts:
             - name: karakeep-data
               mountPath: /data
