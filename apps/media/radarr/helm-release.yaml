@@ -104,14 +104,12 @@ spec:
         type: nfs
         server: 192.168.20.31
         path: /mnt/tank/media
-        globalMounts:
-          - path: /data
         advancedMounts:
           radarr:
             app:
               - path: /data
                 server: 192.168.20.31
-                path: /mnt/tank/media
+                remotePath: /mnt/tank/media
                 type: nfs
                 mountOptions:
                   - nfsvers=4.1
