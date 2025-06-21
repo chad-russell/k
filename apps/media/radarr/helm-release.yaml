@@ -20,8 +20,8 @@ spec:
         containers:
           app:
             image:
-              repository: lscr.io/linuxserver/radarr
-              tag: "latest"
+              repository: ghcr.io/home-operations/radarr
+              tag: "rolling"
             env:
               TZ: "America/New_York" # Change to your timezone
               RADARR__SERVER__PORT: "80"
@@ -30,8 +30,6 @@ spec:
               RADARR__APP__THEME: "dark"
               RADARR__LOG__LEVEL: "info"
               RADARR__APP__INSTANCENAME: "Radarr"
-              PUID: "1000"
-              PGID: "1000"
             resources:
               requests:
                 cpu: 10m
@@ -63,18 +61,13 @@ spec:
                   failureThreshold: 3
             securityContext:
               allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: false
-              runAsUser: 1000
-              runAsGroup: 1000
               capabilities:
                 drop:
                   - ALL
 
     defaultPodOptions:
       securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
+        fsGroup: 65534
         fsGroupChangePolicy: OnRootMismatch
 
     service:
