@@ -30,6 +30,8 @@ spec:
               SONARR__APP__THEME: "dark"
               SONARR__LOG__LEVEL: "info"
               SONARR__APP__INSTANCENAME: "Sonarr"
+              PUID: "1000"
+              PGID: "1000"
             resources:
               requests:
                 cpu: 10m
@@ -62,7 +64,6 @@ spec:
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: false
-              runAsNonRoot: true
               runAsUser: 1000
               runAsGroup: 1000
               capabilities:

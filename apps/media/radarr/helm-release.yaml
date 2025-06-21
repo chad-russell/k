@@ -30,6 +30,8 @@ spec:
               RADARR__APP__THEME: "dark"
               RADARR__LOG__LEVEL: "info"
               RADARR__APP__INSTANCENAME: "Radarr"
+              PUID: "1000"
+              PGID: "1000"
             resources:
               requests:
                 cpu: 10m
@@ -62,7 +64,6 @@ spec:
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: false
-              runAsNonRoot: true
               runAsUser: 1000
               runAsGroup: 1000
               capabilities:
