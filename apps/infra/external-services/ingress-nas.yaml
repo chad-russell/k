@@ -5,8 +5,7 @@ metadata:
   namespace: external-services
 spec:
   entryPoints:
-    - web
-    - web
+    - websecure
   routes:
     # Redirect root path to /ui/ at Traefik level
     - match: Host(`nas.internal.crussell.io`) && Path(`/`)
@@ -25,6 +24,8 @@ spec:
       services:
         - name: nas-external
           port: 80
+  tls:
+    certResolver: letsencrypt
 ---
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
@@ -49,4 +50,4 @@ spec:
       X-Forwarded-Host: "nas.internal.crussell.io"
       X-Forwarded-Port: "443"
       X-Forwarded-Ssl: "on"
-      X-Url-Scheme: "https" 
+      X-Url-Scheme: "https"

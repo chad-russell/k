@@ -5,10 +5,12 @@ metadata:
   namespace: media
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
     - match: Host(`jackett.internal.crussell.io`)
       kind: Rule
       services:
         - name: jackett
           port: 9117
+  tls:
+    certResolver: letsencrypt

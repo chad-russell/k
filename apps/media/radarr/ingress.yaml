@@ -5,10 +5,12 @@ metadata:
   namespace: media
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
     - match: Host(`radarr.internal.crussell.io`)
       kind: Rule
       services:
         - name: radarr
           port: 80
+  tls:
+    certResolver: letsencrypt

@@ -5,7 +5,7 @@ metadata:
   namespace: external-services
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
     - match: Host(`homeassistant.crussell.io`)
       kind: Rule
@@ -13,3 +13,5 @@ spec:
         - name: homeassistant-external
           port: 8123
           scheme: http
+  tls:
+    certResolver: letsencrypt
