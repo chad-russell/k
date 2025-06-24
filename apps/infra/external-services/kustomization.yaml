@@ -10,6 +10,10 @@ resources:
   - external-nas.yaml
   - ingress-nas.yaml
 
+  # qBittorrent
+  - external-qbittorrent.yaml
+  - ingress-qbittorrent.yaml
+
   # MinIO
   - external-minio.yaml
   - ingress-minio-api.yaml
