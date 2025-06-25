@@ -14,6 +14,10 @@ resources:
   - external-qbittorrent.yaml
   - ingress-qbittorrent.yaml
 
+  # Jellyfin
+  - external-jellyfin.yaml
+  - ingress-jellyfin.yaml
+
   # MinIO
   - external-minio.yaml
   - ingress-minio-api.yaml
