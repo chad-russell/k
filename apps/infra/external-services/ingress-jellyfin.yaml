@@ -13,4 +13,3 @@ spec:
         - name: jellyfin-external
           port: 8096
           scheme: http
-  tls: {}
