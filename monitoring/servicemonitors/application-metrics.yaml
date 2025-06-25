@@ -1,0 +1,72 @@
+---
+# ServiceMonitor for applications with prometheus.io/scrape annotations
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: application-services
+  namespace: monitoring
+  labels:
+    app: prometheus
+spec:
+  namespaceSelector:
+    any: true
+  selector:
+    matchLabels:
+      prometheus.io/scrape: "true"
+  endpoints:
+    - port: metrics
+      interval: 30s
+      path: /metrics
+      honorLabels: true
+      relabelings:
+        - sourceLabels:
+            [__meta_kubernetes_service_annotation_prometheus_io_path]
+          action: replace
+          targetLabel: __metrics_path__
+          regex: (.+)
+        - sourceLabels:
+            [
+              __address__,
+              __meta_kubernetes_service_annotation_prometheus_io_port,
+            ]
+          action: replace
+          regex: ([^:]+)(?::\d+)?;(\d+)
+          replacement: $1:$2
+          targetLabel: __address__
+        - action: labelmap
+          regex: __meta_kubernetes_service_label_(.+)
+        - sourceLabels: [__meta_kubernetes_namespace]
+          action: replace
+          targetLabel: kubernetes_namespace
+        - sourceLabels: [__meta_kubernetes_service_name]
+          action: replace
+          targetLabel: kubernetes_service_name
+
+---
+# ServiceMonitor for HTTP endpoints (like web applications)
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: http-probe-services
+  namespace: monitoring
+  labels:
+    app: prometheus
+spec:
+  namespaceSelector:
+    matchNames:
+      - forgejo
+      - jellyseerr
+      - paperless-ngx
+      - mealie
+      - ntfy
+      - open-webui
+  selector: {}
+  endpoints:
+    - port: http
+      interval: 60s
+      path: /
+      honorLabels: true
+      metricRelabelings:
+        - sourceLabels: [__name__]
+          regex: "probe_success"
+          action: keep

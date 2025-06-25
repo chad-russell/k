@@ -1,0 +1,50 @@
+---
+# ServiceMonitor for Redis instances across applications
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: redis-metrics
+  namespace: monitoring
+  labels:
+    app: prometheus
+spec:
+  namespaceSelector:
+    matchNames:
+      - forgejo
+      - paperless-ngx
+      - mealie
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: redis
+  endpoints:
+    - port: metrics
+      interval: 30s
+      path: /metrics
+      honorLabels: true
+      relabelings:
+        - sourceLabels: [__meta_kubernetes_namespace]
+          targetLabel: redis_namespace
+        - sourceLabels: [__meta_kubernetes_pod_name]
+          targetLabel: redis_instance
+
+---
+# ServiceMonitor for PostgreSQL connections (if using postgres_exporter)
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: postgres-application-metrics
+  namespace: monitoring
+  labels:
+    app: prometheus
+spec:
+  namespaceSelector:
+    matchNames:
+      - postgres-system
+  selector:
+    matchLabels:
+      cnpg.io/cluster: postgres-cluster
+  endpoints:
+    - port: metrics
+      interval: 30s
+      path: /metrics
+      honorLabels: true

@@ -1,8 +1,26 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: monitoring
 
 resources:
-  - namespace.yaml
-  - prometheus/
-  - grafana/
-  - node-exporter/
+  # Core monitoring
+  - prometheus/prometheus.yaml
+  - prometheus/config.yaml
+  - grafana/grafana.yaml
+  - node-exporter/node-exporter.yaml
+
+  # CRDs
+  - crds/servicemonitors.yaml
+
+  # ServiceMonitors
+  - servicemonitors/application-metrics.yaml
+  - servicemonitors/database-metrics.yaml
+
+  # PodMonitors
+  - podmonitors/application-pods.yaml
+
+  # Exporters
+  - exporters/blackbox-exporter.yaml
+
+  # Additional targets
+  - prometheus/application-targets.yaml

@@ -1,0 +1,51 @@
+---
+# Add this configuration to your Prometheus config.yaml under scrape_configs
+# Blackbox HTTP health checks for all applications
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-blackbox-targets
+  namespace: monitoring
+data:
+  targets.yml: |
+    - job_name: 'blackbox-http'
+      metrics_path: /probe
+      params:
+        module: [http_2xx]
+      static_configs:
+        - targets:
+          # Development apps
+          - https://forgejo.internal.crussell.io
+          - https://it-tools.internal.crussell.io
+          - https://n8n.internal.crussell.io
+          
+          # Media apps
+          - https://jellyseerr.internal.crussell.io
+          - https://radarr.internal.crussell.io
+          - https://sonarr.internal.crussell.io
+          - https://prowlarr.internal.crussell.io
+          - https://jackett.internal.crussell.io
+          - https://qbittorrent.internal.crussell.io
+          
+          # Productivity apps
+          - https://paperless.internal.crussell.io
+          - https://mealie.internal.crussell.io
+          - https://ntfy.internal.crussell.io
+          - https://open-webui.internal.crussell.io
+          - https://karakeep.internal.crussell.io
+          
+      relabel_configs:
+        - source_labels: [__address__]
+          target_label: __param_target
+        - source_labels: [__param_target]
+          target_label: instance
+        - target_label: __address__
+          replacement: blackbox-exporter.monitoring.svc.cluster.local:9115
+        - source_labels: [__param_target]
+          regex: https://([^.]+)\..*
+          target_label: app_name
+          replacement: $1
+        - source_labels: [__param_target]
+          regex: https://[^/]+/.*
+          target_label: app_category
+          replacement: web-app
