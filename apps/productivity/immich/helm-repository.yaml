@@ -5,4 +5,4 @@ metadata:
   namespace: immich
 spec:
   interval: 15m
-  url: oci://ghcr.io/immich-app/immich-charts
+  url: https://immich-app.github.io/immich-charts
