@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - prometheus.yaml
   - config.yaml
-  - ingress.yaml
+  - application-targets.yaml
