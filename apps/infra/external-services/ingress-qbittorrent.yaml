@@ -12,5 +12,4 @@ spec:
       services:
         - name: qbittorrent-external
           port: 8080
-  tls:
-    certResolver: letsencrypt
+  tls: {}

@@ -12,5 +12,4 @@ spec:
       services:
         - name: minio-external
           port: 9002
-  tls:
-    certResolver: letsencrypt
+  tls: {}

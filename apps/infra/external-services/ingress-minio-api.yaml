@@ -13,5 +13,4 @@ spec:
         - name: minio-external
           port: 9000
           scheme: http
-  tls:
-    certResolver: letsencrypt
+  tls: {}
