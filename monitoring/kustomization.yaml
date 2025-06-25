@@ -10,7 +10,6 @@ resources:
   - exporters
   - servicemonitors
   - podmonitors
-  - crds
 
   # PodMonitors (will skip for now - CRD doesn't exist)
   # - podmonitors/application-pods.yaml
