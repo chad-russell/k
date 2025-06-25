@@ -9,18 +9,12 @@ resources:
   - grafana/grafana.yaml
   - node-exporter/node-exporter.yaml
 
-  # CRDs
-  - crds/servicemonitors.yaml
-
-  # ServiceMonitors
+  # ServiceMonitors (CRD already exists in cluster)
   - servicemonitors/application-metrics.yaml
   - servicemonitors/database-metrics.yaml
 
-  # PodMonitors
-  - podmonitors/application-pods.yaml
+  # PodMonitors (will skip for now - CRD doesn't exist)
+  # - podmonitors/application-pods.yaml
 
   # Exporters
   - exporters/blackbox-exporter.yaml
-
-  # Additional targets
-  - prometheus/application-targets.yaml

@@ -3,9 +3,6 @@ kind: Kustomization
 metadata:
   name: flux-system
 resources:
-  # Monitoring CRDs (required dependencies)
-  - ./monitoring/crds
-
   # Core Infrastructure
   - ./metallb
   - ./longhorn
@@ -19,5 +16,5 @@ resources:
   # Database
   - ./postgres
 
-  # Monitoring
+  # Monitoring (CRDs already exist in cluster)
   - ./monitoring
