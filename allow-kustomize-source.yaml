@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-kustomize-source
+  namespace: flux-system
+spec:
+  podSelector:
+    matchLabels:
+      app: source-controller
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: kustomize-controller
+      ports:
+        - protocol: TCP
+          port: 9090
