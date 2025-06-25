@@ -37,16 +37,17 @@ spec:
             name: immich-secrets
             key: db-password
 
-    # Persistence configuration
-    persistence:
-      # Library storage using NFS to your NAS
-      library:
-        enabled: true
-        type: nfs
-        server: 192.168.20.31
-        path: /mnt/tank/photos
-        globalMounts:
-          - path: /usr/src/app/upload
+    # Immich configuration
+    immich:
+      persistence:
+        # Library storage using NFS to your NAS
+        library:
+          enabled: true
+          type: nfs
+          server: 192.168.20.31
+          path: /mnt/tank/photos
+          globalMounts:
+            - path: /usr/src/app/upload
 
     # Server configuration
     server:
