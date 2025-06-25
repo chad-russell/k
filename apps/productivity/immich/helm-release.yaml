@@ -17,7 +17,7 @@ spec:
   values:
     # Global image settings
     image:
-      tag: "v1.122.3"
+      tag: "v1.135.3"
 
     # Environment variables
     env:
@@ -52,7 +52,7 @@ spec:
       enabled: true
       image:
         repository: ghcr.io/immich-app/immich-server
-        tag: "v1.122.3"
+        tag: "v1.135.3"
 
       resources:
         requests:
@@ -88,7 +88,7 @@ spec:
       enabled: true
       image:
         repository: ghcr.io/immich-app/immich-machine-learning
-        tag: "v1.122.3"
+        tag: "v1.135.3"
 
       resources:
         requests:
