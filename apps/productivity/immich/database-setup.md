@@ -189,7 +189,7 @@ Once the database is set up successfully:
 
 1. Deploy Immich: `kubectl apply -k apps/productivity/immich/`
 2. Check pod status: `kubectl get pods -n immich`
-3. Access Immich at: `https://immich.internal.crussell.io`
+3. Access Immich at: `https://immich.crussell.io`
 
 ## Summary
 

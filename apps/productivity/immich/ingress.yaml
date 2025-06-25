@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`immich.internal.crussell.io`)
+    - match: Host(`immich.crussell.io`)
       kind: Rule
       services:
         - name: immich-server

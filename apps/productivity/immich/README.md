@@ -71,7 +71,7 @@ Expected pods:
 ### 6. Access Immich
 
 Once deployed, Immich will be available at:
-- **URL**: https://immich.internal.crussell.io
+- **URL**: https://immich.crussell.io
 - **Initial Setup**: Follow the web setup wizard to create your admin account
 
 ## Configuration
@@ -170,7 +170,7 @@ After setup, you can use the Immich mobile app:
 - **iOS**: Available on the App Store
 - **Android**: Available on Google Play Store or F-Droid
 
-Configure the mobile app to connect to `https://immich.internal.crussell.io`.
+Configure the mobile app to connect to `https://immich.crussell.io`.
 
 ## Backup
 
