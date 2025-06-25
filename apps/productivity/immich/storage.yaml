@@ -22,5 +22,6 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 500Gi # TODO: Ask about this
+      storage: 500Gi
   volumeName: immich-library-pv
+  storageClassName: ""
