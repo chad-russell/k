@@ -43,7 +43,8 @@ spec:
               memory: 512Mi
       volumes:
         - name: grafana-storage
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: grafana-data
         - name: grafana-datasources
           configMap:
             name: grafana-datasources
