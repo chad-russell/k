@@ -3,8 +3,9 @@ kind: Kustomization
 namespace: monitoring
 
 resources:
+  - config.yaml
+  - prometheus.yaml
   - namespace.yaml
-  - prometheus
   - grafana
   - node-exporter
   - servicemonitors
