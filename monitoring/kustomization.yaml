@@ -4,12 +4,14 @@ namespace: monitoring
 
 resources:
   - namespace.yaml
-  - crds
+  - helm-repository.yaml
+  - helm-release.yaml
   - prometheus
   - grafana
   - node-exporter
   - exporters
   - servicemonitors
+  - podmonitors
 
   # PodMonitors (will skip for now - CRD doesn't exist)
   # - podmonitors/application-pods.yaml
