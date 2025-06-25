@@ -3,13 +3,14 @@ kind: Kustomization
 namespace: monitoring
 
 resources:
-  - config.yaml
-  - prometheus.yaml
   - namespace.yaml
+  - prometheus
   - grafana
   - node-exporter
-  - servicemonitors
   - exporters
+  - servicemonitors
+  - podmonitors
+  - crds
 
   # PodMonitors (will skip for now - CRD doesn't exist)
   # - podmonitors/application-pods.yaml
