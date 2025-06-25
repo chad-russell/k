@@ -4,6 +4,7 @@ namespace: monitoring
 
 resources:
   - namespace.yaml
+  - crds
   - prometheus
   - grafana
   - node-exporter
