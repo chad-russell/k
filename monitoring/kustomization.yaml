@@ -7,6 +7,8 @@ resources:
   - prometheus/prometheus.yaml
   - prometheus/config.yaml
   - grafana/grafana.yaml
+  - grafana/config.yaml
+  - grafana/dashboards-config.yaml
   - node-exporter/node-exporter.yaml
 
   # ServiceMonitors (CRD already exists in cluster)
