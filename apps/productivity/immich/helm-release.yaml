@@ -27,6 +27,8 @@ spec:
       DB_PORT: "5432"
       DB_DATABASE_NAME: "immich"
       DB_VECTOR_EXTENSION: "pgvector"
+      # Upload location
+      UPLOAD_LOCATION: "/usr/src/app/upload"
       DB_USERNAME:
         valueFrom:
           secretKeyRef:
@@ -67,19 +69,19 @@ spec:
           custom: true
           spec:
             httpGet:
-              path: /api/server-info/ping
-              port: 3001
+              path: /api/server/ping
+              port: 2283
             initialDelaySeconds: 30
             periodSeconds: 30
-        readiness:
-          enabled: true
-          custom: true
-          spec:
-            httpGet:
-              path: /api/server-info/ping
-              port: 3001
-            initialDelaySeconds: 15
-            periodSeconds: 10
+        # readiness:
+        #   enabled: true
+        #   custom: true
+        #   spec:
+        #     httpGet:
+        #       path: /api/server/ping
+        #       port: 2283
+        #     initialDelaySeconds: 15
+        #     periodSeconds: 10
 
     # Machine Learning service
     machine-learning:
@@ -121,17 +123,23 @@ spec:
         controller: server
         ports:
           http:
-            port: 3001
+            port: 2283
 
     # Ingress will be handled separately
     ingress:
       main:
         enabled: false
 
-    # Default pod options
-    defaultPodOptions:
-      securityContext:
-        runAsUser: 999
-        runAsGroup: 999
-        fsGroup: 999
-        fsGroupChangePolicy: OnRootMismatch
+    # Security context for all containers
+    securityContext:
+      runAsUser: 999
+      runAsGroup: 999
+      fsGroup: 999
+      fsGroupChangePolicy: OnRootMismatch
+
+    # Pod security context
+    podSecurityContext:
+      runAsUser: 999
+      runAsGroup: 999
+      fsGroup: 999
+      fsGroupChangePolicy: OnRootMismatch

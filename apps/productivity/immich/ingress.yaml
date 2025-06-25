@@ -11,7 +11,7 @@ spec:
       kind: Rule
       services:
         - name: immich-server
-          port: 3001
+          port: 2283
       middlewares:
         - name: immich-headers
   tls:
