@@ -11,7 +11,7 @@ resources:
   - node-exporter
   - exporters
   - servicemonitors
-  - podmonitors
+  # - podmonitors  # Re-enable after CRDs are installed
 
   # PodMonitors (will skip for now - CRD doesn't exist)
   # - podmonitors/application-pods.yaml
