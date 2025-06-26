@@ -7,4 +7,4 @@ resources:
   - secrets.yaml
   - operator.yaml
   - cluster.yaml
-  - monitoring.yaml
+  # - monitoring.yaml  # Re-enable after ServiceMonitor CRD is installed
