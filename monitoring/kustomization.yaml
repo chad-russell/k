@@ -10,8 +10,6 @@ resources:
   - grafana
   - node-exporter
   - exporters
-  # - servicemonitors  # Re-enable after CRDs are installed
-  # - podmonitors      # Re-enable after CRDs are installed
-
-  # PodMonitors (will skip for now - CRD doesn't exist)
+  - servicemonitors
+  - podmonitors
   # - podmonitors/application-pods.yaml
