@@ -17,7 +17,7 @@ data:
           # Development apps
           - https://forgejo.internal.crussell.io
           - https://it-tools.internal.crussell.io
-          - https://n8n.internal.crussell.io
+          - https://n8n.crussell.io
           
           # Media apps
           - https://jellyseerr.internal.crussell.io
