@@ -5,3 +5,4 @@ resources:
   - prometheus.yaml
   - config.yaml
   - application-targets.yaml
+  - storage.yaml
