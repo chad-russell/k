@@ -16,7 +16,7 @@ spec:
       interval: 15m
   valuesFrom:
     - kind: Secret
-      name: forgejo-database-secret
+      name: forgejo-db-credentials
       valuesKey: RUNNER_TOKEN
       targetPath: act_runner.token
   values:
