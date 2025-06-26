@@ -1,4 +1,4 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: forgejo-runners
@@ -14,11 +14,11 @@ spec:
         name: vquie
         namespace: forgejo
       interval: 15m
-    valuesFrom:
-      - kind: Secret
-        name: forgejo-database-secret
-        valuesKey: RUNNER_TOKEN
-        targetPath: act_runner.token
+  valuesFrom:
+    - kind: Secret
+      name: forgejo-database-secret
+      valuesKey: RUNNER_TOKEN
+      targetPath: act_runner.token
   values:
     # Storage configuration - using Longhorn like your main Forgejo deployment
     act_runner:
