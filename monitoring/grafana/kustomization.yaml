@@ -4,3 +4,4 @@ resources:
   - grafana.yaml
   - config.yaml
   - ingress.yaml
+  - storage.yaml

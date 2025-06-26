@@ -12,4 +12,3 @@ resources:
   - exporters
   - servicemonitors
   - podmonitors
-  # - podmonitors/application-pods.yaml
