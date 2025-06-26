@@ -6,3 +6,5 @@ resources:
   - secrets.yaml
   - helm-release.yaml
   - ingress.yaml
+  - runners-helm-repository.yaml
+  - runners-helm-release.yaml
