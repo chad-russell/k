@@ -14,6 +14,11 @@ spec:
         name: vquie
         namespace: forgejo
       interval: 15m
+    valuesFrom:
+      - kind: Secret
+        name: forgejo-database-secret
+        valuesKey: RUNNER_TOKEN
+        targetPath: act_runner.token
   values:
     # Storage configuration - using Longhorn like your main Forgejo deployment
     act_runner:
@@ -22,17 +27,11 @@ spec:
       # Forgejo instance URL - should match your Forgejo deployment
       instance: "https://forgejo.internal.crussell.io"
 
-      # Runner registration token - loaded from existing secrets.yaml
-      # Generate this from: Site Administration > Actions > Runners > Create Runner
-      tokenFromSecret:
-        secretName: forgejo-database-secret
-        secretKey: RUNNER_TOKEN
-
-      # Runner name/label
-      name: "k3s-runner"
-
       # Runner labels - these determine which jobs this runner can execute
-      labels: "ubuntu-latest,ubuntu-22.04,self-hosted"
+      labels:
+        - "ubuntu-latest:docker://node:16-bullseye"
+        - "ubuntu-22.04:docker://node:16-bullseye"
+        - "self-hosted:docker://node:16-bullseye"
 
     # Resource configuration
     resources:
