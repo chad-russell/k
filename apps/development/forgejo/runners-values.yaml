@@ -1,0 +1,40 @@
+# Forgejo Actions Runner Configuration
+# This file configures the act-runner deployment for Forgejo Actions
+
+act_runner:
+  # Storage configuration - using Longhorn like your main Forgejo deployment
+  storageclass: "longhorn"
+
+  # Forgejo instance URL - should match your Forgejo deployment
+  instance: "https://forgejo.internal.crussell.io"
+
+  # Runner registration token - you'll need to generate this from Forgejo UI
+  # Go to Site Administration > Actions > Runners to create a registration token
+  token: "YOUR_REGISTRATION_TOKEN_HERE"
+
+  # Runner name/label
+  name: "k3s-runner"
+
+  # Runner labels - these determine which jobs this runner can execute
+  labels: "ubuntu-latest,ubuntu-22.04,self-hosted"
+
+# Resource configuration
+resources:
+  limits:
+    cpu: 2000m
+    memory: 4Gi
+  requests:
+    cpu: 1000m
+    memory: 2Gi
+
+# Replica configuration for scaling
+replicaCount: 1
+
+# Node selector if you want to run on specific nodes
+nodeSelector: {}
+
+# Tolerations for node taints
+tolerations: []
+
+# Affinity rules
+affinity: {}
