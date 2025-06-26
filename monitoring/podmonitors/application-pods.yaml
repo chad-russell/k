@@ -33,7 +33,7 @@ spec:
       relabelings:
         - sourceLabels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
           action: keep
-          regex: true
+          regex: "true"
         - sourceLabels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
           action: replace
           targetLabel: __metrics_path__
