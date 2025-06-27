@@ -23,7 +23,7 @@ jobs:
   flux-operations:
     runs-on: self-hosted
     container:
-      image: ubuntu:22.04
+      image: node:18-bullseye
     steps:
       - name: Checkout repository
         uses: https://github.com/actions/checkout@v4
