@@ -22,18 +22,20 @@ on:
 jobs:
   flux-operations:
     runs-on: self-hosted
+    container:
+      image: ubuntu:22.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Flux CLI
-        run: |
-          # Download and install Flux CLI
-          curl -s https://fluxcd.io/install.sh | sudo bash
-          flux --version
+        uses: fluxcd/flux2/action@main
+        with:
+          version: "latest"
 
       - name: Verify Flux installation
         run: |
+          flux --version
           flux check --pre
 
       - name: Manual Flux Action
