@@ -1,10 +1,22 @@
-- name: Setup Flux CLI
-  uses: fluxcd/flux2/action@main
-  with:
-    # Flux CLI version e.g. 2.0.0.
-    # Defaults to latest stable release.
-    version: "latest"
+name: Test Runner
 
-    # Alternative download location for the Flux CLI binary.
-    # Defaults to path relative to $RUNNER_TOOL_CACHE.
-    bindir: ""
+on:
+  workflow_dispatch:
+
+jobs:
+  test-basic:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Flux CLI
+        uses: fluxcd/flux2/action@main
+        with:
+          # Flux CLI version e.g. 2.0.0.
+          # Defaults to latest stable release.
+          version: "latest"
+
+          # Alternative download location for the Flux CLI binary.
+          # Defaults to path relative to $RUNNER_TOOL_CACHE.
+          bindir: ""
