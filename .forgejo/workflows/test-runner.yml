@@ -1,69 +1,10 @@
-name: Test Runner
+- name: Setup Flux CLI
+  uses: fluxcd/flux2/action@main
+  with:
+    # Flux CLI version e.g. 2.0.0.
+    # Defaults to latest stable release.
+    version: "latest"
 
-on:
-  workflow_dispatch:
-
-jobs:
-  test-basic:
-    runs-on: self-hosted
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Test runner environment
-        run: |
-          echo "🏃 Testing Forgejo Actions Runner"
-          echo "Runner name: $(hostname)"
-          echo "Working directory: $(pwd)"
-          echo "User: $(whoami)"
-          echo "Date: $(date)"
-
-      - name: Test system info
-        run: |
-          echo "🖥️ System Information:"
-          echo "OS: $(uname -a)"
-          echo "CPU info:"
-          lscpu | head -20
-          echo "Memory info:"
-          free -h
-          echo "Disk space:"
-          df -h
-
-      - name: Test Kubernetes access
-        run: |
-          echo "☸️ Testing Kubernetes access:"
-          if command -v kubectl &> /dev/null; then
-            echo "✅ kubectl is available"
-            kubectl version --client
-            kubectl cluster-info
-            kubectl get nodes
-          else
-            echo "❌ kubectl not found"
-          fi
-
-      - name: Test Flux access
-        run: |
-          echo "🌊 Testing Flux access:"
-          if command -v flux &> /dev/null; then
-            echo "✅ Flux CLI is available"
-            flux --version
-            flux check --pre
-          else
-            echo "⚠️ Flux CLI not found - will be installed when needed"
-          fi
-
-      - name: Test Docker access
-        run: |
-          echo "🐳 Testing Docker access:"
-          if command -v docker &> /dev/null; then
-            echo "✅ Docker is available"
-            docker --version
-            docker info | head -10
-          else
-            echo "⚠️ Docker not found"
-          fi
-
-      - name: Success message
-        run: |
-          echo "🎉 Runner test completed successfully!"
-          echo "Your Forgejo Actions runner is working properly!"
+    # Alternative download location for the Flux CLI binary.
+    # Defaults to path relative to $RUNNER_TOOL_CACHE.
+    bindir: ""

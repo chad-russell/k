@@ -29,9 +29,17 @@ jobs:
         uses: https://github.com/actions/checkout@v4
 
       - name: Setup Flux CLI
-        uses: https://github.com/fluxcd/flux2/action@main
-        with:
-          version: "latest"
+        run: |
+          # Install curl if not present
+          apt-get update && apt-get install -y curl
+
+          # Download and install Flux CLI directly
+          FLUX_VERSION=$(curl -s https://api.github.com/repos/fluxcd/flux2/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+          curl -Lo flux.tar.gz "https://github.com/fluxcd/flux2/releases/download/${FLUX_VERSION}/flux_${FLUX_VERSION#v}_linux_amd64.tar.gz"
+          tar -xzf flux.tar.gz
+          chmod +x flux
+          mv flux /usr/local/bin/
+          rm flux.tar.gz
 
       - name: Verify Flux installation
         run: |
