@@ -6,6 +6,7 @@ resources:
   # Core Infrastructure
   - ./metallb
   - ./longhorn
+  - ./capacitor
 
   # Ingress Controller
   - ./ingress
