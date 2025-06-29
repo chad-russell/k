@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`dashlit.crussell.io`)
+    - match: Host(`dashlit.internal.crussell.io`)
       kind: Rule
       services:
         - name: dashlit

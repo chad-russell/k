@@ -22,7 +22,7 @@ spec:
             - containerPort: 3000
           env:
             - name: ORIGIN
-              value: "https://dashlit.crussell.io"
+              value: "https://dashlit.internal.crussell.io"
           volumeMounts:
             - name: dashlit-data
               mountPath: /app/data
