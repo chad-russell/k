@@ -17,7 +17,7 @@ spec:
         - name: paperless-gpt
           image: icereed/paperless-gpt:latest
           ports:
-            - containerPort: 3000
+            - containerPort: 8080
           env:
             # Paperless-NGX Configuration
             - name: PAPERLESS_BASE_URL
@@ -83,7 +83,7 @@ spec:
 
             # Application Configuration
             - name: PORT
-              value: "3000"
+              value: "8080"
             - name: LOG_LEVEL
               value: "info"
 
@@ -125,6 +125,6 @@ spec:
   selector:
     app: paperless-gpt
   ports:
-    - port: 3000
-      targetPort: 3000
+    - port: 8080
+      targetPort: 8080
   type: ClusterIP

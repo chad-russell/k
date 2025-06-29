@@ -11,6 +11,6 @@ spec:
       kind: Rule
       services:
         - name: paperless-gpt
-          port: 3000
+          port: 8080
   tls:
     certResolver: letsencrypt
