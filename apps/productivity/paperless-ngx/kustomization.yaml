@@ -9,5 +9,5 @@ resources:
   - tika.yaml
   - deployment.yaml
   - ingress.yaml
-  - paperless-ai-deployment.yaml
-  - paperless-ai-ingress.yaml
+  - paperless-gpt-deployment.yaml
+  - paperless-gpt-ingress.yaml
