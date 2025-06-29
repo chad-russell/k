@@ -35,7 +35,7 @@ spec:
             - name: RAG_SERVICE_ENABLED
               value: "true"
             - name: PAPERLESS_API_URL
-              value: "http://paperless-ngx:8000/api"
+              value: "http://paperless-ngx:8000"
           volumeMounts:
             - name: paperless-ai-data
               mountPath: /app/data
