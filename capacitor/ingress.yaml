@@ -11,6 +11,6 @@ spec:
       kind: Rule
       services:
         - name: capacitor
-          port: http
+          port: 9000
   tls:
     certResolver: letsencrypt

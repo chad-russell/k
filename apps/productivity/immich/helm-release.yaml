@@ -1,4 +1,4 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: immich
@@ -104,6 +104,37 @@ spec:
           size: 10Gi
           storageClass: "longhorn"
           accessMode: ReadWriteOnce
+
+      # Proper health checks for machine-learning (runs on port 3003)
+      probes:
+        liveness:
+          enabled: true
+          custom: true
+          spec:
+            httpGet:
+              path: /ping
+              port: 3003
+            initialDelaySeconds: 60
+            periodSeconds: 30
+        readiness:
+          enabled: true
+          custom: true
+          spec:
+            httpGet:
+              path: /ping
+              port: 3003
+            initialDelaySeconds: 30
+            periodSeconds: 10
+        startup:
+          enabled: true
+          custom: true
+          spec:
+            httpGet:
+              path: /ping
+              port: 3003
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 30
 
     # Redis (internal)
     redis:
