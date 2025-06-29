@@ -1,0 +1,16 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dashlit
+  namespace: dashlit
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`dashlit.crussell.io`)
+      kind: Rule
+      services:
+        - name: dashlit
+          port: 3000
+  tls:
+    certResolver: letsencrypt
