@@ -20,8 +20,8 @@ spec:
         containers:
           app:
             image:
-              repository: lscr.io/linuxserver/sonarr
-              tag: "latest"
+              repository: ghcr.io/home-operations/sonarr
+              tag: "rolling"
             env:
               TZ: "America/New_York" # Change to your timezone
               SONARR__SERVER__PORT: "80"
@@ -30,8 +30,6 @@ spec:
               SONARR__APP__THEME: "dark"
               SONARR__LOG__LEVEL: "info"
               SONARR__APP__INSTANCENAME: "Sonarr"
-              PUID: "1000"
-              PGID: "1000"
             resources:
               requests:
                 cpu: 10m
@@ -69,6 +67,7 @@ spec:
 
     defaultPodOptions:
       securityContext:
+        fsGroup: 65534
         fsGroupChangePolicy: OnRootMismatch
 
     service:
