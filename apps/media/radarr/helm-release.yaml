@@ -1,4 +1,4 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: radarr
@@ -97,17 +97,5 @@ spec:
         type: nfs
         server: 192.168.20.31
         path: /mnt/tank/media
-        advancedMounts:
-          radarr:
-            app:
-              - path: /data
-                server: 192.168.20.31
-                remotePath: /mnt/tank/media
-                type: nfs
-                mountOptions:
-                  - nfsvers=4.1
-                  - rsize=1048576
-                  - wsize=1048576
-                  - hard
-                  - intr
-                  - noatime
+        globalMounts:
+          - path: /data
