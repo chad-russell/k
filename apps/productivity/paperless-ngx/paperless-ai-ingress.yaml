@@ -1,0 +1,16 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: paperless-ai
+  namespace: paperless-ngx
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`paperless-ai.internal.crussell.io`)
+      kind: Rule
+      services:
+        - name: paperless-ai
+          port: 3000
+  tls:
+    certResolver: letsencrypt
