@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`paperless.internal.crussell.io`)
+    - match: Host(`paperless-gpt.internal.crussell.io`)
       kind: Rule
       services:
         - name: paperless-gpt
