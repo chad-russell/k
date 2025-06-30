@@ -150,11 +150,16 @@ spec:
 
     # Service configuration
     service:
-      main:
+      server:
         controller: server
         ports:
           http:
             port: 2283
+      machine-learning:
+        controller: machine-learning
+        ports:
+          http:
+            port: 3003
 
     # Ingress will be handled separately
     ingress:
