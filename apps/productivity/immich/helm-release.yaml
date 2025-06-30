@@ -123,7 +123,9 @@ spec:
           ports:
             http:
               port: 3003
-          nameOverride: "immich-machine-learning"
+
+      # Override the service name to match what the server expects
+      fullnameOverride: "immich-machine-learning"
 
     # Redis (internal)
     redis:
