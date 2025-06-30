@@ -5,3 +5,4 @@ resources:
   - pgadmin/
   - traefik/
   - uptime-kuma
+  - kubernetes-dashboard
