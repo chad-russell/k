@@ -100,7 +100,8 @@ spec:
 
       persistence:
         cache:
-          enabled: false
+          enabled: true
+          type: emptyDir
 
       # Proper health checks for machine-learning (runs on port 3003)
       probes:
