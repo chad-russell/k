@@ -100,10 +100,7 @@ spec:
 
       persistence:
         cache:
-          enabled: true
-          size: 10Gi
-          storageClass: "longhorn"
-          accessMode: ReadWriteOnce
+          enabled: false
 
       # Proper health checks for machine-learning (runs on port 3003)
       probes:
