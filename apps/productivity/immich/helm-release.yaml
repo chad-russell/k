@@ -110,12 +110,11 @@ spec:
         TRANSFORMERS_CACHE: "/cache"
         MPLCONFIGDIR: "/tmp/matplotlib"
 
-      # Security context
+      # Security context - running as root to avoid permission issues
       securityContext:
-        runAsUser: 999
-        runAsGroup: 999
-        fsGroup: 999
-        fsGroupChangePolicy: OnRootMismatch
+        runAsUser: 0
+        runAsGroup: 0
+        fsGroup: 0
 
       # Service configuration
       service:
