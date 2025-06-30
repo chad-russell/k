@@ -13,4 +13,6 @@ spec:
         kind: HelmRepository
         name: kubernetes-dashboard
         namespace: kubernetes-dashboard
-  values: {}
+  values:
+    api:
+      replicas: 1
