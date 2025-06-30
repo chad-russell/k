@@ -187,7 +187,7 @@ data:
           - targets:
             # Development apps
             - https://forgejo.internal.crussell.io
-            - https://it-tools.internal.crussell.io
+            - https://ittools.internal.crussell.io
             - https://n8n.crussell.io
             
             # Media apps
@@ -195,7 +195,7 @@ data:
             - https://radarr.internal.crussell.io
             - https://sonarr.internal.crussell.io
             - https://prowlarr.internal.crussell.io
-            - https://jackett.internal.crussell.io
+            - https://jackett.internal.crussell.io/UI/Dashboard
             - https://qbittorrent.internal.crussell.io
             
             # Productivity apps
