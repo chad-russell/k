@@ -18,4 +18,3 @@ resources:
   - ./postgres
 
   # Monitoring (CRDs already exist in cluster)
-  - ./monitoring

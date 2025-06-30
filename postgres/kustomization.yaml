@@ -4,7 +4,6 @@ metadata:
   name: postgres
 resources:
   - namespace.yaml
-  - secrets.yaml
   - operator.yaml
   - cluster.yaml
-  - monitoring.yaml
+  - secrets.yaml
