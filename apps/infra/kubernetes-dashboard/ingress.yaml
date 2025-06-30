@@ -13,5 +13,6 @@ spec:
         - name: kubernetes-dashboard-kong-proxy
           port: 443
           scheme: https
+          serversTransport: kubernetes-dashboard-transport
   tls:
     certResolver: letsencrypt
