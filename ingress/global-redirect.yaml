@@ -19,8 +19,9 @@ spec:
   routes:
     - match: HostRegexp(`{host:.+}`)
       kind: Rule
+      priority: 1
+      middlewares:
+        - name: global-https-redirect
       services:
         - name: api@internal
           kind: TraefikService
-      middlewares:
-        - name: global-https-redirect
