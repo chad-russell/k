@@ -9,3 +9,4 @@ resources:
   - traefik-helm-values.yaml
   - secrets.yaml
   - release.yaml
+  - global-redirect.yaml

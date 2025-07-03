@@ -1,4 +1,16 @@
 apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: jackett-headers
+  namespace: media
+spec:
+  headers:
+    customRequestHeaders:
+      X-Forwarded-Proto: "https"
+      X-Forwarded-Port: "443"
+      X-Forwarded-Host: "jackett.internal.crussell.io"
+---
+apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
   name: jackett
@@ -12,5 +24,7 @@ spec:
       services:
         - name: jackett
           port: 9117
+      middlewares:
+        - name: jackett-headers
   tls:
     certResolver: letsencrypt
