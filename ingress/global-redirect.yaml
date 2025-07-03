@@ -17,7 +17,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: HostRegexp(`{host:.+}`)
+    - match: PathPrefix(`/`)
       kind: Rule
       priority: 1
       middlewares:
