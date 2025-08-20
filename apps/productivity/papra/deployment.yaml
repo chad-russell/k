@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: papra
+  namespace: papra
+  labels:
+    app: papra
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: papra
+  template:
+    metadata:
+      labels:
+        app: papra
+    spec:
+      containers:
+        - name: papra
+          image: ghcr.io/papra-hq/papra:latest
+          ports:
+            - containerPort: 1221
+          envFrom:
+            - secretRef:
+                name: papra-secrets
+          env:
+            - name: APP_BASE_URL
+              value: "https://papra.internal.crussell.io"
+          volumeMounts:
+            - name: papra-data
+              mountPath: /app/app-data
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 1221
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 1221
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+      volumes:
+        - name: papra-data
+          persistentVolumeClaim:
+            claimName: papra-data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: papra-data
+  namespace: papra
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 5Gi
