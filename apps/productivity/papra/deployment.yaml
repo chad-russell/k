@@ -15,6 +15,11 @@ spec:
       labels:
         app: papra
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
       containers:
         - name: papra
           image: ghcr.io/papra-hq/papra:latest
@@ -25,7 +30,7 @@ spec:
                 name: papra-secrets
           env:
             - name: APP_BASE_URL
-              value: "https://papra.internal.crussell.io"
+              value: "https://papra.internal.crussell.io" # Update if needed
           volumeMounts:
             - name: papra-data
               mountPath: /app/app-data
@@ -48,9 +53,6 @@ spec:
               port: 1221
             initialDelaySeconds: 15
             periodSeconds: 10
-          securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
       volumes:
         - name: papra-data
           persistentVolumeClaim:
