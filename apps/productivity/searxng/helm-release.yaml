@@ -34,8 +34,6 @@ spec:
     # SearXNG specific configuration
     # NOTE: The 'config.settings.data' value MUST be a single string containing the entire
     #       SearXNG 'settings.yml' file content.
-    #       Please replace the 'secret_key' value with a strong, randomly generated string.
-    #       Example command to generate a key: openssl rand -hex 32
     config:
       settings:
         enabled: true
@@ -45,7 +43,7 @@ spec:
             instance_name: "My SearXNG Instance"
             contact_url: "mailto:admin@crussell.io" # Update if you have a contact
             enable_admin: false # Set to true if you need admin features
-            default_doi_resolver: 'oadoi.org' # Fix for KeyError: 'default_doi_resolver'
+            default_doi_resolver: oadoi.org # Fix for KeyError: 'default_doi_resolver' (removed quotes)
           
           # Search settings
           search:
@@ -56,7 +54,7 @@ spec:
           server:
             port: 8080
             bind_address: "0.0.0.0"
-            secret_key: "84420c2dda3c7ab9c6b17f00a5cc86289d0b7cdb748a96fc1f2f15981922def8"
+            secret_key: "84420c2dda3c7ab9c6b17f00a5cc86289d0b7cdb748a96fc1f2f15981922def8" # Your key is preserved
             base_url: false # Typically handled by ingress
             
           # UI settings
