@@ -11,6 +11,6 @@ spec:
       kind: Rule
       services:
         - name: searxng
-          port: 80
+          port: http # Corrected to use the service's port name
   tls:
     certResolver: letsencrypt
