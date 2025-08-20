@@ -43,7 +43,6 @@ spec:
             instance_name: "My SearXNG Instance"
             contact_url: "mailto:admin@crussell.io" # Update if you have a contact
             enable_admin: false # Set to true if you need admin features
-            # default_doi_resolver removed as it's not a valid setting
           
           # Search settings
           search:
@@ -91,6 +90,16 @@ spec:
           
           # Stats (if enabling)
           stats: false
+
+          # DOI Resolver settings (moved to top level)
+          doi_resolvers:
+            oadoi.org: 'https://oadoi.org/'
+            doi.org: 'https://doi.org/'
+            sci-hub.se: 'https://sci-hub.se/'
+            sci-hub.st: 'https://sci-hub.st/'
+            sci-hub.ru: 'https://sci-hub.ru/'
+
+          default_doi_resolver: oadoi.org
           
       limiter:
         enabled: true # Enable IP limiter
