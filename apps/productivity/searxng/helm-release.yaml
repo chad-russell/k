@@ -32,15 +32,14 @@ spec:
       port: 8080 # Default port for SearXNG
 
     # SearXNG specific configuration
-    # NOTE: The 'config.settings.data' section below contains sensitive information like 'secret_key'.
-    #       It is HIGHLY RECOMMENDED to manage this data via a Kubernetes Secret and reference it here,
-    #       rather than including it directly in this HelmRelease resource.
+    # NOTE: The 'config.settings.data' value MUST be a single string containing the entire
+    #       SearXNG 'settings.yml' file content.
     #       Please replace the 'secret_key' value with a strong, randomly generated string.
     #       Example command to generate a key: openssl rand -hex 32
     config:
       settings:
         enabled: true
-        data:
+        data: |
           # General settings
           general:
             instance_name: "My SearXNG Instance"
@@ -56,7 +55,7 @@ spec:
           server:
             port: 8080
             bind_address: "0.0.0.0"
-            secret_key: "f9757696ee192dc035c4ebde2e43f4b86561df81150ac60c9f94d9c8e33600c2"
+            secret_key: "9b3097ce6659e4bc7d3fd15c42199deb874491207b448c4a3b78d36126ea7472"
             base_url: false # Typically handled by ingress
             
           # UI settings
@@ -91,11 +90,9 @@ spec:
           
       limiter:
         enabled: true # Enable IP limiter
-        # data: {} # Add custom limiter data if needed
       
       uwsgi:
         enabled: true # Enable UWSGI
-        # data: {} # Add custom UWSGI data if needed
 
     # Resource limits (adjust based on your needs)
     resources:
@@ -105,15 +102,3 @@ spec:
       requests:
         cpu: 100m
         memory: 256Mi
-
-    # Health checks (using chart defaults)
-    # The chart defaults configure liveness and readiness probes to check '/' on port 8080.
-    # These are implicitly handled, so no need to explicitly define unless overriding.
-    # livenessProbe:
-    #   httpGet:
-    #     path: /
-    #     port: http # Resolves to 8080
-    # readinessProbe:
-    #   httpGet:
-    #     path: /
-    #     port: http # Resolves to 8080
