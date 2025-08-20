@@ -1,0 +1,119 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: searxng
+  namespace: searxng
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: searxng
+      version: "1.0.7" # Updated to the latest available version
+      sourceRef:
+        kind: HelmRepository
+        name: searxng
+        namespace: searxng
+      interval: 15m
+  values:
+    # Disable built-in ingress - we'll use Traefik IngressRoute instead
+    ingress:
+      enabled: false
+
+    # Image configuration - Pin the tag for stability
+    image:
+      tag: "1.0.1" # App version corresponding to chart 1.0.7
+
+    # Main SearXNG application configuration
+    replicaCount: 1
+
+    # Service configuration
+    service:
+      type: ClusterIP
+      port: 8080 # Default port for SearXNG
+
+    # SearXNG specific configuration
+    # NOTE: The 'config.settings.data' section below contains sensitive information like 'secret_key'.
+    #       It is HIGHLY RECOMMENDED to manage this data via a Kubernetes Secret and reference it here,
+    #       rather than including it directly in this HelmRelease resource.
+    #       Please replace the 'secret_key' value with a strong, randomly generated string.
+    #       Example command to generate a key: openssl rand -hex 32
+    config:
+      settings:
+        enabled: true
+        data:
+          # General settings
+          general:
+            instance_name: "My SearXNG Instance"
+            contact_url: "mailto:admin@crussell.io" # Update if you have a contact
+            enable_admin: false # Set to true if you need admin features
+          
+          # Search settings
+          search:
+            safe_search: 0 # 0 = None, 1 = Moderate, 2 = Strict
+            max_results: 20
+            
+          # Server settings
+          server:
+            port: 8080
+            bind_address: "0.0.0.0"
+            secret_key: "f9757696ee192dc035c4ebde2e43f4b86561df81150ac60c9f94d9c8e33600c2"
+            base_url: false # Typically handled by ingress
+            
+          # UI settings
+          ui:
+            static_use_hash: true
+            
+          # Outgoing requests settings
+          outgoing:
+            request_timeout: 5.0
+            max_request_timeout: 15.0
+            
+          # Enabled engines (example, customize as needed)
+          engines:
+            - name: google
+              enabled: true
+            - name: duckduckgo
+              enabled: true
+            # Add more engines as desired
+            
+          # Preferences (example)
+          preferences:
+            lock: []
+          
+          # Tokens (if using)
+          tokens: {}
+          
+          # Categories (if customizing)
+          categories: []
+          
+          # Stats (if enabling)
+          stats: false
+          
+      limiter:
+        enabled: true # Enable IP limiter
+        # data: {} # Add custom limiter data if needed
+      
+      uwsgi:
+        enabled: true # Enable UWSGI
+        # data: {} # Add custom UWSGI data if needed
+
+    # Resource limits (adjust based on your needs)
+    resources:
+      limits:
+        cpu: 500m
+        memory: 512Mi
+      requests:
+        cpu: 100m
+        memory: 256Mi
+
+    # Health checks (using chart defaults)
+    # The chart defaults configure liveness and readiness probes to check '/' on port 8080.
+    # These are implicitly handled, so no need to explicitly define unless overriding.
+    # livenessProbe:
+    #   httpGet:
+    #     path: /
+    #     port: http # Resolves to 8080
+    # readinessProbe:
+    #   httpGet:
+    #     path: /
+    #     port: http # Resolves to 8080

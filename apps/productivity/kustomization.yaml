@@ -10,3 +10,4 @@ resources:
   - open-webui/
   - paperless-ngx/
   - papra/
+  - searxng/
