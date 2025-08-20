@@ -21,7 +21,7 @@ spec:
 
     # Image configuration - Using 'latest' as 1.0.1 tag was not found
     image:
-      tag: "latest"
+      tag: "latest" # App version corresponding to chart 1.0.7
 
     # Main SearXNG application configuration
     replicaCount: 1
@@ -45,6 +45,7 @@ spec:
             instance_name: "My SearXNG Instance"
             contact_url: "mailto:admin@crussell.io" # Update if you have a contact
             enable_admin: false # Set to true if you need admin features
+            default_doi_resolver: 'oadoi.org' # Fix for KeyError: 'default_doi_resolver'
           
           # Search settings
           search:
@@ -55,7 +56,7 @@ spec:
           server:
             port: 8080
             bind_address: "0.0.0.0"
-            secret_key: "6a504558a411af1794a5fc8a87c2b0d4a6845cf7b0eb9854cdc0e227f3e9397b"
+            secret_key: "84420c2dda3c7ab9c6b17f00a5cc86289d0b7cdb748a96fc1f2f15981922def8"
             base_url: false # Typically handled by ingress
             
           # UI settings
@@ -68,10 +69,15 @@ spec:
             max_request_timeout: 15.0
             
           # Enabled engines (example, customize as needed)
+          # Fix for "engine" field missing errors
           engines:
             - name: google
+              engine: google
+              shortcut: go
               enabled: true
             - name: duckduckgo
+              engine: duckduckgo
+              shortcut: ddg
               enabled: true
             # Add more engines as desired
             
