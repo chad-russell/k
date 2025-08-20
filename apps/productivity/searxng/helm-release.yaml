@@ -19,9 +19,9 @@ spec:
     ingress:
       enabled: false
 
-    # Image configuration - Pin the tag for stability
+    # Image configuration - Using 'latest' as 1.0.1 tag was not found
     image:
-      tag: "1.0.1" # App version corresponding to chart 1.0.7
+      tag: "latest"
 
     # Main SearXNG application configuration
     replicaCount: 1
@@ -55,7 +55,7 @@ spec:
           server:
             port: 8080
             bind_address: "0.0.0.0"
-            secret_key: "9b3097ce6659e4bc7d3fd15c42199deb874491207b448c4a3b78d36126ea7472"
+            secret_key: "6a504558a411af1794a5fc8a87c2b0d4a6845cf7b0eb9854cdc0e227f3e9397b"
             base_url: false # Typically handled by ingress
             
           # UI settings
