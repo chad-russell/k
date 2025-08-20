@@ -43,7 +43,7 @@ spec:
             instance_name: "My SearXNG Instance"
             contact_url: "mailto:admin@crussell.io" # Update if you have a contact
             enable_admin: false # Set to true if you need admin features
-            default_doi_resolver: oadoi.org # Fix for KeyError: 'default_doi_resolver' (removed quotes)
+            # default_doi_resolver removed as it's not a valid setting
           
           # Search settings
           search:
