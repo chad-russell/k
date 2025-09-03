@@ -15,6 +15,15 @@ spec:
       labels:
         app: tasktrove
     spec:
+      securityContext:
+        fsGroup: 1000
+      initContainers:
+        - name: init-data-permissions
+          image: busybox:1.36
+          command: ['chown', '-R', '1000:1000', '/app/data']
+          volumeMounts:
+            - name: data
+              mountPath: /app/data
       containers:
         - name: tasktrove
           image: ghcr.io/dohsimpson/tasktrove:latest
@@ -42,6 +51,9 @@ spec:
               port: 3000
             initialDelaySeconds: 10
             periodSeconds: 10
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
       volumes:
         - name: data
           persistentVolumeClaim:
