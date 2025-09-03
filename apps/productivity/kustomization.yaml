@@ -10,4 +10,5 @@ resources:
   - open-webui/
   - paperless-ngx/
   - papra/
+  - tasktrove/
   - searxng/
