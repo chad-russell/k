@@ -33,7 +33,7 @@ spec:
               port: 8080
               httpHeaders:
                 - name: Host
-                  value: chexmix.internal.crussell.io
+                  value: chex-mix-timer.crussell.io
             initialDelaySeconds: 15
             periodSeconds: 30
           readinessProbe:
@@ -42,7 +42,7 @@ spec:
               port: 8080
               httpHeaders:
                 - name: Host
-                  value: chexmix.internal.crussell.io
+                  value: chex-mix-timer.crussell.io
             initialDelaySeconds: 5
             periodSeconds: 10
 ---
