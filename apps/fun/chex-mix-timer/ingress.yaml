@@ -1,0 +1,17 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: chex-mix-timer
+  namespace: chex-mix-timer
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`chex-mix-timer.crussell.io`)
+      kind: Rule
+      services:
+        - name: chex-mix-timer
+          port: 80
+  tls:
+    certResolver: letsencrypt
+
