@@ -1,0 +1,26 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageUpdateAutomation
+metadata:
+  name: chex-mix-timer
+  namespace: flux-system
+spec:
+  interval: 1m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  git:
+    checkout:
+      ref:
+        branch: main
+    commit:
+      author:
+        email: flux-bot@internal.crussell.io
+        name: Flux Bot
+      messageTemplate: "chore: update chex-mix-timer image to {{range .Updated.Images}}{{.}}{{end}}"
+    push:
+      branch: main
+  update:
+    path: ./
+    strategy: Setters
+

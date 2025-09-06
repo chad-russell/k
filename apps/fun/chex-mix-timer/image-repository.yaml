@@ -1,0 +1,9 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: chex-mix-timer
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  image: ghcr.io/chad-russell/chex-mix-timer
+

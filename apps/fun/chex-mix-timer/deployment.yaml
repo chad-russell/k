@@ -17,7 +17,10 @@ spec:
     spec:
       containers:
         - name: chex-mix-timer
-          image: ghcr.io/chad-russell/chex-mix-timer:latest
+          # Flux Image Automation will maintain this tag via setter below
+          image: ghcr.io/chad-russell/chex-mix-timer:v0.0.0
+          # kustomize.toolkit.fluxcd.io substitutions for Image Update
+          # imagePolicy: flux-system:chex-mix-timer
           ports:
             - containerPort: 8080
           resources:
