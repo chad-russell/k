@@ -1,4 +1,4 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: image.toolkit.fluxcd.io/v1beta2
 kind: ImageRepository
 metadata:
   name: chex-mix-timer
@@ -6,4 +6,3 @@ metadata:
 spec:
   interval: 1m0s
   image: ghcr.io/chad-russell/chex-mix-timer
-
