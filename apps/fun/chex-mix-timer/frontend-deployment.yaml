@@ -1,40 +1,38 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: chex-mix-timer
+  name: chex-mix-timer-frontend
   namespace: chex-mix-timer
   labels:
-    app: chex-mix-timer
+    app: chex-mix-timer-frontend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: chex-mix-timer
+      app: chex-mix-timer-frontend
   template:
     metadata:
       labels:
-        app: chex-mix-timer
+        app: chex-mix-timer-frontend
     spec:
       containers:
-        - name: chex-mix-timer
+        - name: chex-mix-timer-frontend
           # Flux Image Automation will maintain this tag via setter below
-          image: ghcr.io/chad-russell/chex-mix-timer:v0.0.4 # {"$imagepolicy": "flux-system:chex-mix-timer"}
+          image: ghcr.io/chad-russell/chex-mix-timer-frontend:v0.0.4 # {"$imagepolicy": "flux-system:chex-mix-timer-frontend"}
           ports:
-            - containerPort: 8080
-          env:
-            - name: REDIS_URL
-              value: "redis://redis.infra.svc.cluster.local:6379"
-            - name: VAPID_PUBLIC_KEY
-              value: "BGpviRcstRBqjCSjDX3rm4AhAzck48BL9EH0T8LhjPi2PuWG2An3p3DmZ2U3iKSl4UF_qX61qDTTdtUcobkwXwM"
-            - name: VAPID_PRIVATE_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: chex-mix-timer-secrets
-                  key: VAPID_PRIVATE_KEY
+            - containerPort: 80
+              name: http
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 50m
+              memory: 64Mi
           livenessProbe:
             httpGet:
               path: /
-              port: 8080
+              port: 80
               httpHeaders:
                 - name: Host
                   value: chex-mix-timer.crussell.io
@@ -43,7 +41,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /
-              port: 8080
+              port: 80
               httpHeaders:
                 - name: Host
                   value: chex-mix-timer.crussell.io
@@ -53,14 +51,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: chex-mix-timer
+  name: chex-mix-timer-frontend
   namespace: chex-mix-timer
   labels:
-    app: chex-mix-timer
+    app: chex-mix-timer-frontend
 spec:
   selector:
-    app: chex-mix-timer
+    app: chex-mix-timer-frontend
   ports:
     - port: 80
-      targetPort: 8080
+      targetPort: 80
   type: ClusterIP
