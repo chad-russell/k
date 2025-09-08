@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chex-mix-timer-backend
+  namespace: chex-mix-timer
+  labels:
+    app: chex-mix-timer-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chex-mix-timer-backend
+  template:
+    metadata:
+      labels:
+        app: chex-mix-timer-backend
+    spec:
+      containers:
+        - name: chex-mix-timer-backend
+          # Flux Image Automation will maintain this tag via setter below
+          image: ghcr.io/chad-russell/chex-mix-timer-backend:v0.0.1 # {"$imagepolicy": "flux-system:chex-mix-timer-backend"}
+          ports:
+            - containerPort: 8080
+              name: http
+          env:
+            - name: REDIS_URL
+              value: "redis://redis.infra.svc.cluster.local:6379"
+            - name: VAPID_PUBLIC_KEY
+              value: "BGpviRcstRBqjCSjDX3rm4AhAzck48BL9EH0T8LhjPi2PuWG2An3p3DmZ2U3iKSl4UF_qX61qDTTdtUcobkwXwM"
+            - name: VAPID_PRIVATE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: chex-mix-timer-secrets
+                  key: VAPID_PRIVATE_KEY
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 100m
+              memory: 128Mi
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+              httpHeaders:
+                - name: Host
+                  value: chex-mix-timer.crussell.io
+            initialDelaySeconds: 15
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+              httpHeaders:
+                - name: Host
+                  value: chex-mix-timer.crussell.io
+            initialDelaySeconds: 5
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chex-mix-timer-backend
+  namespace: chex-mix-timer
+  labels:
+    app: chex-mix-timer-backend
+spec:
+  selector:
+    app: chex-mix-timer-backend
+  ports:
+    - port: 8080
+      targetPort: 8080
+  type: ClusterIP

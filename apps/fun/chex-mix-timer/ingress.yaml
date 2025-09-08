@@ -7,10 +7,15 @@ spec:
   entryPoints:
     - websecure
   routes:
+    - match: Host(`chex-mix-timer.crussell.io`) && PathPrefix(`/api`)
+      kind: Rule
+      services:
+        - name: chex-mix-timer-backend
+          port: 8080
     - match: Host(`chex-mix-timer.crussell.io`)
       kind: Rule
       services:
-        - name: chex-mix-timer
+        - name: chex-mix-timer-frontend
           port: 80
   tls:
     certResolver: letsencrypt

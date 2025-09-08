@@ -3,8 +3,12 @@ kind: Kustomization
 
 resources:
   - namespace.yaml
-  - deployment.yaml
+  - frontend-deployment.yaml
+  - backend-deployment.yaml
   - ingress.yaml
-  - image-repository.yaml
-  - image-policy.yaml
   - secrets.yaml
+  - frontend-image-repository.yaml
+  - frontend-image-policy.yaml
+  - backend-image-repository.yaml
+  - backend-image-policy.yaml
+  - image-update-automation.yaml
