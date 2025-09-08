@@ -21,7 +21,7 @@ spec:
           app:
             image:
               repository: ghcr.io/home-operations/jackett
-              tag: "rolling" # {"$imagepolicy": "flux-system:jackett"}
+              tag: "ghcr.io/home-operations/jackett:0.22.2441" # {"$imagepolicy": "flux-system:jackett"}
             env:
               TZ: "America/New_York" # Change to your timezone
               AUTO_UPDATE: "true"
@@ -57,19 +57,16 @@ spec:
               capabilities:
                 drop:
                   - ALL
-
     defaultPodOptions:
       securityContext:
         fsGroup: 65534 # nobody group
         fsGroupChangePolicy: OnRootMismatch
-
     service:
       app:
         controller: jackett
         ports:
           http:
             port: 9117
-
     persistence:
       config:
         enabled: true
