@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   imageRepositoryRef:
-    name: chex-mix-timer
+  name: chex-mix-timer-frontend
   policy:
     semver:
       range: v*
