@@ -1,11 +1,11 @@
 apiVersion: image.toolkit.fluxcd.io/v1beta2
 kind: ImagePolicy
 metadata:
-  name: chex-mix-timer
+  name: chex-mix-timer-frontend
   namespace: flux-system
 spec:
   imageRepositoryRef:
-  name: chex-mix-timer-frontend
+    name: chex-mix-timer-frontend
   policy:
     semver:
       range: v*
