@@ -25,6 +25,11 @@ spec:
           env:
             - name: VAPID_PUBLIC_KEY
               value: "BGpviRcstRBqjCSjDX3rm4AhAzck48BL9EH0T8LhjPi2PuWG2An3p3DmZ2U3iKSl4UF_qX61qDTTdtUcobkwXwM"
+            - name: VAPID_PRIVATE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: chex-mix-timer-secrets
+                  key: VAPID_PRIVATE_KEY
           resources:
             requests:
               cpu: 50m
