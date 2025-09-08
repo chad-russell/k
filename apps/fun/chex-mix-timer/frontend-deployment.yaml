@@ -22,14 +22,6 @@ spec:
           ports:
             - containerPort: 80
               name: http
-          env:
-            - name: VAPID_PUBLIC_KEY
-              value: "BGpviRcstRBqjCSjDX3rm4AhAzck48BL9EH0T8LhjPi2PuWG2An3p3DmZ2U3iKSl4UF_qX61qDTTdtUcobkwXwM"
-            - name: VAPID_PRIVATE_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: chex-mix-timer-secrets
-                  key: VAPID_PRIVATE_KEY
           resources:
             requests:
               cpu: 50m
@@ -37,6 +29,11 @@ spec:
             limits:
               cpu: 50m
               memory: 64Mi
+          volumeMounts:
+            - name: nginx-config
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+              readOnly: true
           livenessProbe:
             httpGet:
               path: /
@@ -55,6 +52,10 @@ spec:
                   value: chex-mix-timer.crussell.io
             initialDelaySeconds: 5
             periodSeconds: 10
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: nginx-config
 ---
 apiVersion: v1
 kind: Service
