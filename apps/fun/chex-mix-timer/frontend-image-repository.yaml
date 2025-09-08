@@ -5,4 +5,4 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m0s
-  image: ghcr.io/chad-russell/chex-mix-timer
+  image: ghcr.io/chad-russell/chex-mix-timer-frontend
