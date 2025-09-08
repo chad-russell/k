@@ -9,7 +9,7 @@ spec:
   routes:
     - match: HostSNI(`redis.internal.crussell.io`)
       services:
-        - name: redis-master
+        - name: redis
           port: 6379
   tls:
-    passthrough: true
+    certResolver: letsencrypt
