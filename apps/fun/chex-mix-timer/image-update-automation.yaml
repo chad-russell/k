@@ -17,10 +17,9 @@ spec:
       author:
         email: flux-bot@internal.crussell.io
         name: Flux Bot
-      messageTemplate: "chore: update chex-mix-timer image to {{range .Updated.Images}}{{.}}{{end}}"
+      messageTemplate: "chore(images): update {{range .Updated.Images}}{{.}} {{end}}"
     push:
       branch: main
   update:
     path: ./
     strategy: Setters
-

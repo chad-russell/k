@@ -21,7 +21,7 @@ spec:
           app:
             image:
               repository: ghcr.io/home-operations/jackett
-              tag: "rolling"
+              tag: "rolling" # {"$imagepolicy": "flux-system:jackett"}
             env:
               TZ: "America/New_York" # Change to your timezone
               AUTO_UPDATE: "true"

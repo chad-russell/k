@@ -21,7 +21,7 @@ spec:
           app:
             image:
               repository: ghcr.io/home-operations/sonarr
-              tag: "rolling"
+              tag: "rolling" # {"$imagepolicy": "flux-system:sonarr"}
             env:
               TZ: "America/New_York" # Change to your timezone
               SONARR__SERVER__PORT: "80"
