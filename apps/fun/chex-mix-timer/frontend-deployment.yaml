@@ -18,10 +18,13 @@ spec:
       containers:
         - name: chex-mix-timer-frontend
           # Flux Image Automation will maintain this tag via setter below
-          image: ghcr.io/chad-russell/chex-mix-timer-frontend:v0.0.4 # {"$imagepolicy": "flux-system:chex-mix-timer-frontend"}
+          image: ghcr.io/chad-russell/chex-mix-timer-frontend:v0.0.5 # {"$imagepolicy": "flux-system:chex-mix-timer-frontend"}
           ports:
             - containerPort: 80
               name: http
+          env:
+            - name: VAPID_PUBLIC_KEY
+              value: "BGpviRcstRBqjCSjDX3rm4AhAzck48BL9EH0T8LhjPi2PuWG2An3p3DmZ2U3iKSl4UF_qX61qDTTdtUcobkwXwM"
           resources:
             requests:
               cpu: 50m
