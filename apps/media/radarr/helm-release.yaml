@@ -21,7 +21,7 @@ spec:
           app:
             image:
               repository: ghcr.io/home-operations/radarr
-              tag: "rolling" # {"$imagepolicy": "flux-system:radarr"}
+              tag: "ghcr.io/home-operations/radarr:5.28.0" # {"$imagepolicy": "flux-system:radarr"}
             env:
               TZ: "America/New_York" # Change to your timezone
               RADARR__SERVER__PORT: "80"
@@ -64,19 +64,16 @@ spec:
               capabilities:
                 drop:
                   - ALL
-
     defaultPodOptions:
       securityContext:
         fsGroup: 65534
         fsGroupChangePolicy: OnRootMismatch
-
     service:
       app:
         controller: radarr
         ports:
           http:
             port: 80
-
     persistence:
       config:
         enabled: true
