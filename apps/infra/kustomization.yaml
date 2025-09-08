@@ -6,3 +6,4 @@ resources:
   - traefik/
   - uptime-kuma
   - kubernetes-dashboard
+  - redis
