@@ -24,11 +24,14 @@ spec:
         size: 2Gi
       resources:
         requests:
-          memory: 128Mi
-          cpu: 100m
+          memory: "128Mi"
+          cpu: "100m"
         limits:
-          memory: 256Mi
-          cpu: 200m
+          memory: "256Mi"
+          cpu: "200m"
+    tls:
+      enabled: true
+      authClients: false
     service:
       type: ClusterIP
       port: 6379
