@@ -7,4 +7,4 @@ resources:
   - ingress.yaml
   - image-repository.yaml
   - image-policy.yaml
-  - image-update-automation.yaml
+  - secrets.yaml

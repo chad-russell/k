@@ -21,13 +21,16 @@ spec:
           image: ghcr.io/chad-russell/chex-mix-timer:v0.0.4 # {"$imagepolicy": "flux-system:chex-mix-timer"}
           ports:
             - containerPort: 8080
-          resources:
-            requests:
-              memory: "64Mi"
-              cpu: "50m"
-            limits:
-              memory: "128Mi"
-              cpu: "200m"
+          env:
+            - name: REDIS_URL
+              value: "redis://redis.infra.svc.cluster.local:6379"
+            - name: VAPID_PUBLIC_KEY
+              value: "BGpviRcstRBqjCSjDX3rm4AhAzck48BL9EH0T8LhjPi2PuWG2An3p3DmZ2U3iKSl4UF_qX61qDTTdtUcobkwXwM"
+            - name: VAPID_PRIVATE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: chex-mix-timer-secrets
+                  key: VAPID_PRIVATE_KEY
           livenessProbe:
             httpGet:
               path: /
