@@ -24,7 +24,7 @@ spec:
               name: http
           env:
             - name: REDIS_URL
-              value: "redis://redis.infra.svc.cluster.local:6379"
+              value: "redis://redis.redis.svc.cluster.local:6379"
             - name: VAPID_PUBLIC_KEY
               value: "BGpviRcstRBqjCSjDX3rm4AhAzck48BL9EH0T8LhjPi2PuWG2An3p3DmZ2U3iKSl4UF_qX61qDTTdtUcobkwXwM"
             - name: VAPID_PRIVATE_KEY
