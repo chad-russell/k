@@ -18,7 +18,7 @@ spec:
       containers:
         - name: chex-mix-timer-frontend
           # Flux Image Automation will maintain this tag via setter below
-          image: ghcr.io/chad-russell/chex-mix-timer-frontend:v0.0.7 # {"$imagepolicy": "flux-system:chex-mix-timer-frontend"}
+          image: ghcr.io/chad-russell/chex-mix-timer-frontend:v0.0.8 # {"$imagepolicy": "flux-system:chex-mix-timer-frontend"}
           ports:
             - containerPort: 80
               name: http
