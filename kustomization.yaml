@@ -16,5 +16,6 @@ resources:
 
   # Database
   - ./postgres
+  - ./qdrant
 
   # Monitoring (CRDs already exist in cluster)
