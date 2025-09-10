@@ -9,7 +9,7 @@ The setup provides:
 - **Primary + 2 replicas** for true high availability
 - **Automatic failover** (< 30 seconds)
 - **Read-only replicas** for performance optimization
-- **Connection pooling** for efficiency
+- **Load balancing** for read/write separation
 - **Encrypted backups** with point-in-time recovery
 - **Longhorn storage** integration for persistent volumes
 - **Monitoring** with Prometheus metrics
@@ -19,8 +19,8 @@ The setup provides:
 - **3 PostgreSQL instances**: 1 primary + 2 replicas
 - **Anti-affinity rules**: Instances spread across different nodes
 - **Storage**: 20Gi per instance using Longhorn storage class
-- **Version**: PostgreSQL 16.1
-- **Backup**: Automated backups to S3-compatible storage
+- **Version**: PostgreSQL 16.2
+- **Backup**: S3-compatible storage support (currently disabled)
 
 ## Services
 
@@ -135,9 +135,36 @@ kubectl get secret postgres-credentials -n postgres-system -o jsonpath='{.data.p
 
 ### Connect as superuser:
 
+**For READ-WRITE operations (DDL, DML, admin tasks):**
+
+First, find the current primary pod (this can change due to failovers):
+
+```bash
+kubectl get cluster postgres-cluster -n postgres-system -o jsonpath='{.status.currentPrimary}'
+```
+
+Then connect to the primary pod:
+
+```bash
+# Replace postgres-cluster-X with the actual primary pod name from above
+kubectl exec -it postgres-cluster-X -n postgres-system -- psql -U postgres -d postgres
+```
+
+**For READ-ONLY operations (queries, monitoring):**
+
+You can connect to any replica pod:
+
 ```bash
 kubectl exec -it postgres-cluster-1 -n postgres-system -- psql -U postgres -d app_db
 ```
+
+**Important:** Always connect to the primary pod for operations like:
+- `DROP DATABASE`, `CREATE DATABASE`
+- `DROP USER`, `CREATE USER` 
+- `ALTER` statements
+- Data modifications (`INSERT`, `UPDATE`, `DELETE`)
+
+Connecting to replica pods will give you "read-only transaction" errors for write operations.
 
 ## Backup and Recovery
 
@@ -163,14 +190,17 @@ See CloudNativePG documentation for detailed recovery procedures.
 ### Manual switchover (planned):
 
 ```bash
-kubectl cnpg promote postgres-cluster-2 -n postgres-system
+# Promote a specific replica to primary (replace X with desired pod number)
+kubectl cnpg promote postgres-cluster-X -n postgres-system
 ```
 
 ### Simulate failure:
 
 ```bash
-# Delete primary pod to test automatic failover
-kubectl delete pod postgres-cluster-1 -n postgres-system
+# Delete current primary pod to test automatic failover
+# First find the primary:
+PRIMARY=$(kubectl get cluster postgres-cluster -n postgres-system -o jsonpath='{.status.currentPrimary}')
+kubectl delete pod $PRIMARY -n postgres-system
 ```
 
 The cluster should automatically promote a replica to primary within ~30 seconds.
@@ -217,7 +247,7 @@ The cluster is pre-configured with optimized settings for a typical workload:
 - `shared_buffers: 256MB`
 - `effective_cache_size: 1GB`
 - `max_connections: 200`
-- Connection pooling enabled
+- Read/write service separation
 - Logging configured for performance monitoring
 
 Adjust these values in `cluster.yaml` based on your specific workload requirements.
@@ -225,7 +255,7 @@ Adjust these values in `cluster.yaml` based on your specific workload requiremen
 ## Security
 
 - All sensitive data encrypted with SOPS
-- TLS connections enforced
+- Role-based access control configured
 - Role-based access control
 - Network policies can be added for additional isolation
 - Backup encryption enabled
