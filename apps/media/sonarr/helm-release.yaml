@@ -21,7 +21,7 @@ spec:
           app:
             image:
               repository: ghcr.io/home-operations/sonarr
-              tag: "ghcr.io/home-operations/sonarr:4.0.15" # {"$imagepolicy": "flux-system:sonarr"}
+              tag: "4.0.15" # {"$imagepolicy": "flux-system:sonarr"}
             env:
               TZ: "America/New_York" # Change to your timezone
               SONARR__SERVER__PORT: "80"

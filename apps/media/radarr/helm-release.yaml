@@ -21,7 +21,7 @@ spec:
           app:
             image:
               repository: ghcr.io/home-operations/radarr
-              tag: "ghcr.io/home-operations/radarr:5.28.0" # {"$imagepolicy": "flux-system:radarr"}
+              tag: "5.28.0" # {"$imagepolicy": "flux-system:radarr"}
             env:
               TZ: "America/New_York" # Change to your timezone
               RADARR__SERVER__PORT: "80"
