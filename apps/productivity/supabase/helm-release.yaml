@@ -1,0 +1,207 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: supabase
+  namespace: supabase
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: supabase
+      version: "1.0.0"
+      sourceRef:
+        kind: HelmRepository
+        name: supabase-community
+        namespace: supabase
+      interval: 15m
+  values:
+    # Studio configuration
+    studio:
+      environment:
+        STUDIO_DEFAULT_ORGANIZATION: "Default Organization"
+        STUDIO_DEFAULT_PROJECT: "Default Project"
+        SUPABASE_PUBLIC_URL: "https://supabase.internal.crussell.io"
+
+    # Kong gateway configuration
+    kong:
+      ingress:
+        enabled: false # We'll use Traefik instead
+      environment:
+        SUPABASE_ANON_KEY:
+          valueFrom:
+            secretKeyRef:
+              name: supabase-secrets
+              key: jwt-anon-key
+        SUPABASE_SERVICE_KEY:
+          valueFrom:
+            secretKeyRef:
+              name: supabase-secrets
+              key: jwt-service-key
+
+    # Database configuration
+    db:
+      enabled: true
+      persistence:
+        enabled: true
+        storageClass: "longhorn"
+        size: 10Gi
+      environment:
+        POSTGRES_DB:
+          valueFrom:
+            secretKeyRef:
+              name: supabase-secrets
+              key: db-database
+        POSTGRES_USER:
+          valueFrom:
+            secretKeyRef:
+              name: supabase-secrets
+              key: db-username
+        POSTGRES_PASSWORD:
+          valueFrom:
+            secretKeyRef:
+              name: supabase-secrets
+              key: db-password
+
+    # Auth service configuration
+    auth:
+      environment:
+        GOTRUE_JWT_SECRET:
+          valueFrom:
+            secretKeyRef:
+              name: supabase-secrets
+              key: jwt-secret
+        GOTRUE_JWT_AUD: "authenticated"
+        GOTRUE_JWT_EXP: "3600"
+        GOTRUE_SITE_URL: "https://supabase.internal.crussell.io"
+        GOTRUE_DISABLE_SIGNUP: "false"
+        # SMTP Configuration (uncomment and configure if needed)
+        # GOTRUE_SMTP_HOST: "smtp.gmail.com"
+        # GOTRUE_SMTP_PORT: "587"
+        # GOTRUE_SMTP_USER:
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: supabase-secrets
+        #       key: smtp-username
+        # GOTRUE_SMTP_PASS:
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: supabase-secrets
+        #       key: smtp-password
+        # GOTRUE_SMTP_SENDER_NAME: "Supabase"
+
+    # REST API configuration
+    rest:
+      environment:
+        PGRST_JWT_SECRET:
+          valueFrom:
+            secretKeyRef:
+              name: supabase-secrets
+              key: jwt-secret
+
+    # Realtime configuration
+    realtime:
+      environment:
+        SECRET_KEY_BASE:
+          valueFrom:
+            secretKeyRef:
+              name: supabase-secrets
+              key: jwt-secret
+
+    # Storage configuration
+    storage:
+      environment:
+        STORAGE_BACKEND: "file"
+        ANON_KEY:
+          valueFrom:
+            secretKeyRef:
+              name: supabase-secrets
+              key: jwt-anon-key
+        SERVICE_KEY:
+          valueFrom:
+            secretKeyRef:
+              name: supabase-secrets
+              key: jwt-service-key
+      persistence:
+        enabled: true
+        storageClass: "longhorn"
+        size: 20Gi
+
+    # Analytics configuration
+    analytics:
+      environment:
+        LOGFLARE_API_KEY:
+          valueFrom:
+            secretKeyRef:
+              name: supabase-secrets
+              key: analytics-api-key
+
+    # Meta configuration
+    meta:
+      environment:
+        PG_META_DB_HOST: "supabase-db"
+        PG_META_DB_PASSWORD:
+          valueFrom:
+            secretKeyRef:
+              name: supabase-secrets
+              key: db-password
+
+    # Functions configuration
+    functions:
+      environment:
+        JWT_SECRET:
+          valueFrom:
+            secretKeyRef:
+              name: supabase-secrets
+              key: jwt-secret
+
+    # Secret configuration
+    secret:
+      jwt:
+        anonKey:
+          valueFrom:
+            secretKeyRef:
+              name: supabase-secrets
+              key: jwt-anon-key
+        serviceKey:
+          valueFrom:
+            secretKeyRef:
+              name: supabase-secrets
+              key: jwt-service-key
+        secret:
+          valueFrom:
+            secretKeyRef:
+              name: supabase-secrets
+              key: jwt-secret
+      db:
+        username:
+          valueFrom:
+            secretKeyRef:
+              name: supabase-secrets
+              key: db-username
+        password:
+          valueFrom:
+            secretKeyRef:
+              name: supabase-secrets
+              key: db-password
+        database:
+          valueFrom:
+            secretKeyRef:
+              name: supabase-secrets
+              key: db-database
+      dashboard:
+        username:
+          valueFrom:
+            secretKeyRef:
+              name: supabase-secrets
+              key: dashboard-username
+        password:
+          valueFrom:
+            secretKeyRef:
+              name: supabase-secrets
+              key: dashboard-password
+      analytics:
+        apiKey:
+          valueFrom:
+            secretKeyRef:
+              name: supabase-secrets
+              key: analytics-api-key
