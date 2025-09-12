@@ -1,8 +1,0 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
-metadata:
-  name: supabase-community
-  namespace: supabase
-spec:
-  interval: 1h
-  url: https://supabase-community.github.io/supabase-kubernetes
