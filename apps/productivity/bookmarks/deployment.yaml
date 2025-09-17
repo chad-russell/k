@@ -18,7 +18,7 @@ spec:
       containers:
         - name: bookmarks
           # Flux Image Automation will maintain this tag via setter below
-          image: ghcr.io/chad-russell/bookmark:v0.1.1 # {"$imagepolicy": "flux-system:bookmarks"}
+          image: ghcr.io/chad-russell/bookmark:v0.1.2 # {"$imagepolicy": "flux-system:bookmarks"}
           ports:
             - containerPort: 3000
               name: http
