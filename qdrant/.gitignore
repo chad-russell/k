@@ -1,6 +1,0 @@
-# Helm
-charts/
-tmpcharts/
-
-# Local development
-values.dev.yaml
