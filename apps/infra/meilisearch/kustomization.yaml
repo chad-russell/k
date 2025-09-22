@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: meilisearch
 resources:
   - namespace.yaml
-  - secret.yaml
+  - secrets.yaml
   - pvc.yaml
   - deployment.yaml
   - service.yaml
