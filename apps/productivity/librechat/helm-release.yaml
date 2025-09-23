@@ -25,6 +25,7 @@ spec:
         DEBUG_PLUGINS: "true"
         ALLOW_REGISTRATION: "true"
         ALLOW_SOCIAL_LOGIN: "true"
+        DOMAIN_SERVER: "https://librechat.internal.crussell.io"
       existingSecretName: "librechat-credentials-env"
       configYamlContent: |
         version: 1.2.9
