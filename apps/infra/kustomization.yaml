@@ -7,4 +7,3 @@ resources:
   - uptime-kuma
   - kubernetes-dashboard
   - redis
-  - meilisearch
