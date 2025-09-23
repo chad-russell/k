@@ -6,8 +6,9 @@ metadata:
 data:
   values.yaml: |
     image:
-      name: traefik
-      tag: v2.10.7
+      registry: docker.io
+      repository: traefik
+      tag: v2.11.2
 
     service:
       type: LoadBalancer

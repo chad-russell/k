@@ -9,7 +9,7 @@ spec:
     spec:
       chart: traefik
       # Find the latest version from https://github.com/traefik/traefik-helm-chart/releases
-      version: "36.0.0"
+      version: "27.0.2"
       sourceRef:
         kind: HelmRepository
         name: traefik
