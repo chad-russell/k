@@ -46,7 +46,7 @@ spec:
     ingress:
       enabled: true
       hosts:
-        - host: chat.k.localhost
+        - host: librechat.example.com
           paths:
             - path: /
               pathType: ImplementationSpecific
