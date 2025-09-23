@@ -7,11 +7,12 @@ spec:
   interval: 15m
   chart:
     spec:
-      chart: ./helm/librechat
+      chart: librechat
+      version: "0.1.0"
       sourceRef:
-        kind: GitRepository
-        name: k
-        namespace: flux-system
+        kind: HelmRepository
+        name: librechat
+        namespace: librechat
       interval: 15m
   values:
     replicaCount: 1
