@@ -46,7 +46,7 @@ spec:
     ingress:
       enabled: true
       hosts:
-        - host: librechat.example.com
+        - host: librechat.internal.crussell.io
           paths:
             - path: /
               pathType: ImplementationSpecific
