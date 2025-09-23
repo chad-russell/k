@@ -5,4 +5,5 @@ metadata:
   namespace: librechat
 spec:
   interval: 1h
-  url: https://danny-avila.github.io/LibreChat/
+  url: https://raw.githubusercontent.com/danny-avila/LibreChat/gh-pages/
+

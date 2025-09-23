@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: librechat
-      version: "0.1.0"  # Use the appropriate version
+      version: "1.8.9"  # Use the version published in the upstream Helm index
       sourceRef:
         kind: HelmRepository
         name: librechat
@@ -131,3 +131,4 @@ spec:
 
     meilisearch:
       enabled: false  # We'll use the external Meilisearch instance
+
