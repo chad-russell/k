@@ -13,3 +13,4 @@ resources:
   - tasktrove/
   - searxng/
   - bookmarks/
+  - librechat/

@@ -1,0 +1,52 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: librechat
+  namespace: librechat
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: ./helm/librechat
+      sourceRef:
+        kind: GitRepository
+        name: k
+        namespace: flux-system
+      interval: 15m
+  values:
+    replicaCount: 1
+    global:
+      librechat:
+        existingSecretName: "librechat-credentials-env"
+        existingSecretApiKey: OPENAI_API_KEY
+    librechat:
+      configEnv:
+        PLUGIN_MODELS: gpt-4,gpt-4-turbo-preview,gpt-4-0125-preview,gpt-4-1106-preview,gpt-4-0613,gpt-3.5-turbo,gpt-3.5-turbo-0125,gpt-3.5-turbo-1106,gpt-3.5-turbo-0613
+        DEBUG_PLUGINS: "true"
+      existingSecretName: "librechat-credentials-env"
+      imageVolume:
+        enabled: true
+        size: 10G
+        accessModes: ReadWriteOnce
+    mongodb:
+      enabled: true
+      auth:
+        enabled: false
+      databases:
+        - LibreChat
+    meilisearch:
+      enabled: true
+      persistence:
+        enabled: true
+        storageClass: ""
+      image:
+        tag: "v1.7.3"
+      auth:
+        existingMasterKeySecret: "librechat-credentials-env"
+    ingress:
+      enabled: true
+      hosts:
+        - host: chat.k.localhost
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
