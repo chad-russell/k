@@ -7,10 +7,9 @@ spec:
   interval: 15m
   chart:
     spec:
-      chart: librechat
-      version: "0.1.0"
+      chart: ./helm/librechat
       sourceRef:
-        kind: HelmRepository
+        kind: GitRepository
         name: librechat
         namespace: librechat
       interval: 15m

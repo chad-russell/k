@@ -1,0 +1,10 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: librechat
+  namespace: librechat
+spec:
+  interval: 30m
+  url: https://github.com/danny-avila/LibreChat
+  ref:
+    branch: main
