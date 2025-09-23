@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`chat.k.localhost`)
+    - match: Host(`librechat.internal.crussell.io`)
       kind: Rule
       services:
         - name: librechat
