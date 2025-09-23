@@ -5,6 +5,10 @@ metadata:
   namespace: traefik
 data:
   values.yaml: |
+    image:
+      name: traefik
+      tag: v2.10.7
+
     service:
       type: LoadBalancer
       ports:
