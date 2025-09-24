@@ -86,7 +86,8 @@ spec:
           - path: /config
       tmp:
         enabled: true
-        type: emptyDir
+        type: persistentVolumeClaim
+        existingClaim: radarr-temp
         globalMounts:
           - path: /tmp
       media:
