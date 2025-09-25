@@ -10,3 +10,9 @@ resources:
   - ingress.yaml
   - secrets.yaml
 
+patches:
+  - target:
+      kind: Deployment
+      name: pinepods
+    path: db-password-patch.yaml
+
