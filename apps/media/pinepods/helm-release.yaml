@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: pinepods
-      version: "3.2.1" # NOTE: Pinning chart version for stability
+      version: "0.7.8" # NOTE: Pinning chart version for stability
       sourceRef:
         kind: HelmRepository
         name: pinepods
