@@ -1,0 +1,4 @@
+.ruhroh/
+.git
+**/tests/
+**/examples/

@@ -62,6 +62,7 @@ spec:
       EMAIL: "admin@local.lan"
       DEBUG_MODE: "false"
       HOSTNAME: "https://pinepods.internal.crussell.io"
+      DB_HOST: "postgres-cluster-rw.postgres-system.svc.cluster.local"
       DB_USER: "pinepods"
       DB_NAME: "pinepods"
       DB_PORT: "5432"
@@ -81,8 +82,3 @@ spec:
       timeoutSeconds: 10
       failureThreshold: 5
 
-  valuesFrom:
-    - kind: Secret
-      name: pinepods-db-credentials
-      valuesKey: password
-      targetPath: postgresql.auth.password

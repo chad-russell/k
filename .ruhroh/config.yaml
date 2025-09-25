@@ -1,0 +1,17 @@
+db_path: .ruhroh/index.db
+ignore_gitignore: true
+embed:
+  provider: mock
+  model: bge-small-en-v1.5
+  base_url: null
+  api_key_env: OPENAI_API_KEY
+  batch_size: 16
+llm:
+  provider: mock
+  base_url: null
+  api_key_env: OPENAI_API_KEY
+  model: null
+chunk:
+  max_lines: 200
+  overlap_lines: 20
+  max_chars: 2000
