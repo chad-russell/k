@@ -69,6 +69,11 @@ spec:
       DB_TYPE: "postgresql"
       VALKEY_HOST: "redis.redis.svc.cluster.local"
       VALKEY_PORT: "6379"
+      DB_PASSWORD:
+        valueFrom:
+          secretKeyRef:
+            name: "pinepods-secret"
+            key: "DB_PASSWORD"
 
     # Health check configuration to allow more time for startup
     livenessProbe:
