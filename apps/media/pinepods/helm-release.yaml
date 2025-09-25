@@ -8,56 +8,57 @@ spec:
   chart:
     spec:
       chart: pinepods
-      version: "0.7.8" # NOTE: Pinning chart version for stability
+      version: "*" # Use latest version to get the most recent fixes
       sourceRef:
         kind: HelmRepository
         name: pinepods
         namespace: pinepods
       interval: 15m
   values:
-    pinepods:
-      image:
-        repository: ghcr.io/pinepods/pinepods
-        tag: "latest" # Consider pinning to a specific version in production
-      service:
-        type: ClusterIP
-        port: 80
-      ingress:
-        enabled: false # We will manage ingress separately with an IngressRoute
-      persistence:
-        enabled: true
-        storageClass: "longhorn"
-        accessMode: ReadWriteOnce
-        size: 10Gi
-        retain: true
-      resources:
-        requests:
-          cpu: 100m
-          memory: 256Mi
-        limits:
-          memory: 2Gi
+    # Main application configuration
+    image:
+      repository: ghcr.io/pinepods/pinepods
+      tag: "latest"
+      pullPolicy: IfNotPresent
 
+    service:
+      type: ClusterIP
+      port: 80
+
+    ingress:
+      enabled: false
+
+    persistence:
+      enabled: true
+      storageClass: "longhorn"
+      accessMode: ReadWriteOnce
+      size: 10Gi
+      retain: true
+
+    resources:
+      requests:
+        cpu: 100m
+        memory: 256Mi
+      limits:
+        memory: 2Gi
+
+    # Disable built-in PostgreSQL and Redis (we'll use external services)
     postgresql:
-      enabled: false # Disable the included PostgreSQL
-
+      enabled: false
     valkey:
-      enabled: false # Disable the included Redis/Valkey
+      enabled: false
 
-    externalDatabase:
-      host: "postgres-cluster-rw.postgres-system.svc.cluster.local"
-      port: 5432
-      user: "pinepods"
-      database: "pinepods"
-      sslmode: "disable"
-      password:
-        secretName: pinepods-db-credentials
-        secretKey: password
-
-    externalRedis:
-      host: "redis.redis.svc.cluster.local"
-      port: 6379
-      password: "" # Assuming no password for the internal Redis
-
+    # Podpeople settings
     podpeople:
+      enabled: true
       environment:
         ntfyUrl: "http://ntfy.ntfy.svc.cluster.local"
+
+    # Application environment
+    env:
+      USERNAME: "admin"
+      PASSWORD: "pinepods"
+      FULLNAME: "Admin User"
+      EMAIL: "admin@local.lan"
+      DEBUG_MODE: "false"
+      HOSTNAME: "https://pinepods.internal.crussell.io"

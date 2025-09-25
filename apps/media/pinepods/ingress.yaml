@@ -11,6 +11,6 @@ spec:
       kind: Rule
       services:
         - name: pinepods
-          port: 80
+          port: 8040
   tls:
     certResolver: letsencrypt

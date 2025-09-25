@@ -1,8 +1,33 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+
 resources:
   - namespace.yaml
   - helm-repository.yaml
   - helm-release.yaml
+  - database-service.yaml
   - ingress.yaml
+
+patches:
+  - target:
+      kind: ConfigMap
+      name: pinepods-config
+    patch: |-
+      apiVersion: v1
+      kind: ConfigMap
+      metadata:
+        name: pinepods-config
+        namespace: pinepods
+      data:
+        DB_NAME: "pinepods"
+        DB_PORT: "5432"
+        DB_TYPE: "postgresql"
+        DB_USER: "pinepods"
+        DEBUG_MODE: "false"
+        EMAIL: "admin@local.lan"
+        FULLNAME: "Admin User"
+        PASSWORD: "pinepods"
+        PEOPLE_API_URL: "https://people.pinepods.online/api/hosts"
+        SEARCH_API_URL: "https://search.pinepods.online/api/search"
+        USERNAME: "admin"
   - secrets.yaml
