@@ -23,7 +23,7 @@ spec:
 
     service:
       type: ClusterIP
-      port: 80
+      port: 8040
 
     ingress:
       enabled: false
