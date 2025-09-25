@@ -57,3 +57,7 @@ spec:
       host: "redis.redis.svc.cluster.local"
       port: 6379
       password: "" # Assuming no password for the internal Redis
+
+    podpeople:
+      environment:
+        ntfyUrl: "http://ntfy.ntfy.svc.cluster.local"
