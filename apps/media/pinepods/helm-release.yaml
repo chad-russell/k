@@ -14,25 +14,6 @@ spec:
         name: pinepods
         namespace: pinepods
       interval: 15m
-      postRenderers:
-        - kustomize:
-            patchesStrategicMerge:
-              - |-
-                apiVersion: apps/v1
-                kind: Deployment
-                metadata:
-                  name: pinepods
-                  namespace: pinepods
-                spec:
-                  template:
-                    spec:
-                      containers:
-                        - name: pinepods
-                          env:
-                            - name: VALKEY_HOST
-                              value: redis.redis.svc.cluster.local
-                            - name: VALKEY_PORT
-                              value: "6379"
   values:
     # Main application configuration
     image:

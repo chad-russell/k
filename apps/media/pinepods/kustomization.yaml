@@ -6,6 +6,7 @@ resources:
   - helm-repository.yaml
   - helm-release.yaml
   - database-service.yaml
+  - external-redis-service.yaml
   - ingress.yaml
   - secrets.yaml
 
