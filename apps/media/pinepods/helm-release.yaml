@@ -62,3 +62,15 @@ spec:
       EMAIL: "admin@local.lan"
       DEBUG_MODE: "false"
       HOSTNAME: "https://pinepods.internal.crussell.io"
+
+    # Health check configuration to allow more time for startup
+    livenessProbe:
+      initialDelaySeconds: 180
+      periodSeconds: 30
+      timeoutSeconds: 10
+      failureThreshold: 5
+    readinessProbe:
+      initialDelaySeconds: 180
+      periodSeconds: 15
+      timeoutSeconds: 10
+      failureThreshold: 5
