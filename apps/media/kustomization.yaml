@@ -4,6 +4,6 @@ resources:
   - prowlarr/
   - sonarr/
   - radarr/
-  # - qbittorrent/
   - jellyseerr/
   - jackett/
+  - pinepods/
