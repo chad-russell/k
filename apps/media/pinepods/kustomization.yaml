@@ -33,22 +33,3 @@ patches:
         USERNAME: "admin"
         VALKEY_HOST: "redis.redis.svc.cluster.local"
         VALKEY_PORT: "6379"
-  - target:
-      kind: Deployment
-      name: pinepods
-    patch: |-
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: pinepods
-        namespace: pinepods
-      spec:
-        template:
-          spec:
-            containers:
-              - name: pinepods
-                env:
-                  - name: VALKEY_HOST
-                    value: redis.redis.svc.cluster.local
-                  - name: VALKEY_PORT
-                    value: "6379"
