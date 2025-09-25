@@ -7,7 +7,6 @@ resources:
   - karakeep/
   - mealie/
   - ntfy/
-  # - open-webui/
   - paperless-ngx/
   - papra/
   - tasktrove/

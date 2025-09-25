@@ -1,9 +1,0 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
-metadata:
-  name: open-webui
-  namespace: open-webui
-spec:
-  interval: 1h
-  type: default
-  url: https://helm.openwebui.com/
