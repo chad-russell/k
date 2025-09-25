@@ -63,6 +63,9 @@ spec:
       DEBUG_MODE: "false"
       HOSTNAME: "https://pinepods.internal.crussell.io"
       DB_USER: "pinepods"
+      DB_NAME: "pinepods"
+      DB_PORT: "5432"
+      DB_TYPE: "postgresql"
 
     # Health check configuration to allow more time for startup
     livenessProbe:
