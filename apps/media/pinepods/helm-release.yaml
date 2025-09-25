@@ -17,7 +17,7 @@ spec:
   values:
     # Main application configuration
     image:
-      repository: ghcr.io/pinepods/pinepods
+      repository: madeofpendletonwool/pinepods
       tag: "latest"
       pullPolicy: IfNotPresent
 
