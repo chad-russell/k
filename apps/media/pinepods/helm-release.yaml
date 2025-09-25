@@ -62,7 +62,7 @@ spec:
       EMAIL: "admin@local.lan"
       DEBUG_MODE: "false"
       HOSTNAME: "https://pinepods.internal.crussell.io"
-      DB_USER: "postgres"
+      DB_USER: "pinepods"
 
     # Health check configuration to allow more time for startup
     livenessProbe:
