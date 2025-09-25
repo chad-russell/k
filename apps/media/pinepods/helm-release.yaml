@@ -82,9 +82,4 @@ spec:
       timeoutSeconds: 10
       failureThreshold: 5
 
-  valuesFrom:
-    - kind: Secret
-      name: pinepods-db-credentials
-      valuesKey: password
-      targetPath: env.DB_PASSWORD
 
