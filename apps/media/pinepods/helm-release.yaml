@@ -42,7 +42,7 @@ spec:
       limits:
         memory: 2Gi
 
-    # Disable built-in PostgreSQL and Redis (we'll use external services)
+    # Disable built-in PostgreSQL and use external Redis instead of bundled Valkey
     postgresql:
       enabled: false
     valkey:
@@ -66,6 +66,8 @@ spec:
       DB_NAME: "pinepods"
       DB_PORT: "5432"
       DB_TYPE: "postgresql"
+      VALKEY_HOST: "redis.redis.svc.cluster.local"
+      VALKEY_PORT: "6379"
 
     # Health check configuration to allow more time for startup
     livenessProbe:
