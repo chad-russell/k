@@ -23,7 +23,7 @@ patches:
         DB_NAME: "pinepods"
         DB_PORT: "5432"
         DB_TYPE: "postgresql"
-        DB_USER: "pinepods"
+        DB_USER: "postgres"
         DEBUG_MODE: "false"
         EMAIL: "admin@local.lan"
         FULLNAME: "Admin User"

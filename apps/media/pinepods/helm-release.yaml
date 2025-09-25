@@ -62,6 +62,7 @@ spec:
       EMAIL: "admin@local.lan"
       DEBUG_MODE: "false"
       HOSTNAME: "https://pinepods.internal.crussell.io"
+      DB_USER: "postgres"
 
     # Health check configuration to allow more time for startup
     livenessProbe:
@@ -74,3 +75,9 @@ spec:
       periodSeconds: 15
       timeoutSeconds: 10
       failureThreshold: 5
+
+  valuesFrom:
+    - kind: Secret
+      name: pinepods-db-credentials
+      valuesKey: password
+      targetPath: postgresql.auth.password
