@@ -8,6 +8,5 @@ resources:
   - database-service.yaml
   - external-redis-service.yaml
   - ingress.yaml
-  - secrets.yaml
 
 
