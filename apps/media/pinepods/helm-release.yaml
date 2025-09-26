@@ -42,15 +42,6 @@ spec:
       limits:
         memory: 2Gi
 
-    # External database configuration  
-    externalDatabase:
-      host: "postgres-cluster-rw.postgres-system.svc.cluster.local"
-      port: 5432
-      user: "pinepods"
-      database: "pinepods"
-      existingSecret: "pinepods-db-credentials"
-      existingSecretPasswordKey: "password"
-    
     # Disable built-in PostgreSQL and use external Redis instead of bundled Valkey
     postgresql:
       enabled: false
@@ -71,8 +62,20 @@ spec:
       EMAIL: "admin@local.lan"
       DEBUG_MODE: "false"
       HOSTNAME: "https://pinepods.internal.crussell.io"
+      DB_HOST: "postgres-cluster-rw.postgres-system.svc.cluster.local"
+      DB_USER: "pinepods"
+      DB_NAME: "pinepods"
+      DB_PORT: "5432"
+      DB_TYPE: "postgresql"
       VALKEY_HOST: "redis.redis.svc.cluster.local"
       VALKEY_PORT: "6379"
+
+  # Reference your encrypted secret for database password
+  valuesFrom:
+    - kind: Secret
+      name: pinepods-db-credentials
+      valuesKey: password
+      targetPath: env.DB_PASSWORD
 
     # Health check configuration to allow more time for startup
     livenessProbe:
