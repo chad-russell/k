@@ -70,13 +70,6 @@ spec:
       VALKEY_HOST: "redis.redis.svc.cluster.local"
       VALKEY_PORT: "6379"
 
-  # Reference your encrypted secret for database password
-  valuesFrom:
-    - kind: Secret
-      name: pinepods-db-credentials
-      valuesKey: password
-      targetPath: env.DB_PASSWORD
-
     # Health check configuration to allow more time for startup
     livenessProbe:
       initialDelaySeconds: 180
@@ -88,3 +81,10 @@ spec:
       periodSeconds: 15
       timeoutSeconds: 10
       failureThreshold: 5
+
+  # Reference your encrypted secret for database password
+  valuesFrom:
+    - kind: Secret
+      name: pinepods-db-credentials
+      valuesKey: password
+      targetPath: env.DB_PASSWORD
