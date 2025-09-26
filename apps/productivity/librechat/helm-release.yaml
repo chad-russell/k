@@ -36,15 +36,14 @@ spec:
             - name: "ChadGPT"
               type: openai
               apiKey: "${CHADGPT_API_KEY}"
-              baseURL: "http://192.168.20.132:8000/api/v1"
+              baseURL: "http://192.168.20.132:8000/v1"
               models:
                 default:
-                  - "gpt-oss-120b"
-                  - "qwen3-coder-30b-a3b-instruct"
+                  - "qwen3-coder-30b-a3b-instruct-q8"
                 fetch: true
-              titleModel: "Qwen3-4B-Instruct-2507-GGUF"
+              titleModel: "qwen3-coder-30b-a3b-instruct-q8"
               summarize: false
-              modelDisplayLabel: "Local LLMs"
+              modelDisplayLabel: "ChadGPT"
             - name: "OpenRouter"
               type: openai
               apiKey: "${OPENROUTER_API_KEY}"
