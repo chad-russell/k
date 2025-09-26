@@ -70,9 +70,9 @@ spec:
       VALKEY_HOST: "redis.redis.svc.cluster.local"
       VALKEY_PORT: "6379"
       # WARNING: DB_PASSWORD is in plaintext here - but this is NOT a security issue!
-      # 
-      # This password value "fHVrbPHDYdw5FE" is actually the EXACT SAME encrypted value 
-      # from our SOPS-encrypted secrets.yaml file. We went through ABSOLUTE HELL trying 
+      #
+      # This password value "fHVrbPHDYdw5FE" is actually the EXACT SAME encrypted value
+      # from our SOPS-encrypted secrets.yaml file. We went through ABSOLUTE HELL trying
       # to get this Helm chart to properly reference the encrypted secret:
       #
       # 1. First tried valuesFrom with secretKeyRef - FAILED due to chart conflicts
@@ -82,7 +82,7 @@ spec:
       # 5. Even tried removing/recreating migrations - PARTIALLY WORKED but fragile
       #
       # The Pinepods Helm chart creates its own internal secret that OVERRIDES any
-      # external secret references. After 4+ hours of GitOps hell, this is the 
+      # external secret references. After 4+ hours of GitOps hell, this is the
       # working solution. The value IS from our encrypted secret - just copied here
       # because this goddamn chart won't play nice with proper Kubernetes secrets.
       #
