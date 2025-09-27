@@ -55,6 +55,30 @@ spec:
               titleModel: "openrouter/auto"
               summarize: false
               modelDisplayLabel: "OpenRouter"
+        mcpServers:
+          # Your MCPX server (internal cluster service)
+          mcpx:
+            type: streamable-http
+            url: http://mcpx.mcpx.svc.cluster.local:9000/mcp
+            headers:
+              x-lunar-consumer-tag: "LibreChat"
+            timeout: 30000
+            serverInstructions: true
+          
+          # File system access
+          filesystem:
+            command: npx
+            args:
+              - -y
+              - "@modelcontextprotocol/server-filesystem"
+              - /app/uploads
+          
+          # Web browser automation
+          puppeteer:
+            command: npx
+            args:
+              - -y
+              - "@modelcontextprotocol/server-puppeteer"
       imageVolume:
         enabled: true
         size: 10G
