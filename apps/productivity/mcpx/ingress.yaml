@@ -1,0 +1,16 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: mcpx
+  namespace: mcpx
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`mcpx.internal.crussell.io`)
+      kind: Rule
+      services:
+        - name: mcpx
+          port: 80
+  tls:
+    certResolver: letsencrypt
