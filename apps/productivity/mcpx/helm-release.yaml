@@ -28,11 +28,9 @@ spec:
           "mcpServers": {
             "searxng": {
               "command": "npx",
-              "args": ["-y", "@kevinwatt/mcp-server-searxng"],
+              "args": ["-y", "mcp-searxng"],
               "env": {
-                "SEARXNG_INSTANCES": "https://searxng.internal.crussell.io",
-                "SEARXNG_USER_AGENT": "CustomBot/1.0",
-                "NODE_TLS_REJECT_UNAUTHORIZED": "0"
+                "SEARXNG_URL": "http://searxng.searxng.svc.cluster.local:8080"
               }
             }
           }
