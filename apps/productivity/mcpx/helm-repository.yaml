@@ -5,4 +5,4 @@ metadata:
   namespace: mcpx
 spec:
   interval: 1h
-  url: https://helm.lunar.dev
+  url: https://thelunarcompany.github.io/proxy-helm-chart/
