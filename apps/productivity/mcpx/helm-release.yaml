@@ -26,17 +26,6 @@ spec:
       mcpJson: |
         {
           "mcpServers": {
-            "memory": {
-              "command": "npx",
-              "args": [
-                "-y",
-                "@modelcontextprotocol/server-memory"
-              ],
-              "env": {
-                "MEMORY_FILE_PATH": "/home/lunar/memory.json"
-              },
-              "icon": "📝"
-            },
             "searxng": {
               "command": "npx",
               "args": ["-y", "mcp-searxng"],
