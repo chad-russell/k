@@ -16,6 +16,22 @@ spec:
       interval: 1h
   values:
     config:
+      mcpJson: |
+        {
+          "mcpServers": {
+            "time": {
+              "command": "uvx",
+              "args": ["mcp-server-time", "--local-timezone=America/New_York"]
+            },
+            "searxng": {
+              "command": "npx",
+              "args": ["-y", "mcp-searxng"],
+              "env": {
+                "SEARXNG_URL": "https://searxng.internal.crussell.io"
+              }
+            }
+          }
+        }
       appYaml: |
         auth:
           enabled: false
@@ -23,9 +39,3 @@ spec:
           base: "allow"
         toolExtensions:
           services: {}
-    controlPlane:
-      host: "mcpx.internal.crussell.io"
-      streaming:
-        enabled: false
-      rest:
-        enabled: false
