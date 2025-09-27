@@ -29,6 +29,17 @@ spec:
             "time": {
               "command": "uvx",
               "args": ["mcp-server-time", "--local-timezone=America/New_York"]
+            },
+            "memory": {
+              "command": "npx",
+              "args": [
+                "-y",
+                "@modelcontextprotocol/server-memory"
+              ],
+              "env": {
+                "MEMORY_FILE_PATH": "/home/lunar/memory.json"
+              },
+              "icon": "📝"
             }
           }
         }
