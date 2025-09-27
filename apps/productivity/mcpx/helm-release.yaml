@@ -1,0 +1,17 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: mcpx
+  namespace: mcpx
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: lunar-mcpx
+      version: "0.1.7"
+      sourceRef:
+        kind: HelmRepository
+        name: lunar
+        namespace: mcpx
+      interval: 1h
+  values: {}
