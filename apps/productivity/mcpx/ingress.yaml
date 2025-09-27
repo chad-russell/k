@@ -12,10 +12,5 @@ spec:
       services:
         - name: mcpx
           port: 9000
-    - match: Host(`mcpx-frontend.internal.crussell.io`)
-      kind: Rule
-      services:
-        - name: mcpx-frontend
-          port: 5173
   tls:
     certResolver: letsencrypt
