@@ -40,6 +40,13 @@ spec:
                 "MEMORY_FILE_PATH": "/home/lunar/memory.json"
               },
               "icon": "📝"
+            },
+            "searxng": {
+              "command": "npx",
+              "args": ["-y", "mcp-searxng"],
+              "env": {
+                "SEARXNG_URL": "https://searxng.searxng.svc.cluster.local:8080"
+              }
             }
           }
         }
@@ -50,11 +57,3 @@ spec:
           base: "allow"
         toolExtensions:
           services: {}
-
-# "searxng": {
-#   "command": "npx",
-#   "args": ["-y", "mcp-searxng"],
-#   "env": {
-#     "SEARXNG_URL": "http://searxng.searxng.svc.cluster.local:8080"
-#   }
-# }
