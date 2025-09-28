@@ -3,3 +3,6 @@ age.key
 
 # Rendered manifests for local testing
 rendered-manifests.yaml
+
+# MacOS
+.DS_Store

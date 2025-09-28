@@ -1,0 +1,102 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: open-webui
+  namespace: open-webui
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: open-webui
+      version: ">=7.0.0 <8.0.0"
+      sourceRef:
+        kind: HelmRepository
+        name: open-webui
+        namespace: open-webui
+      interval: 15m
+  values:
+    # Disable built-in ingress - we'll use Traefik IngressRoute instead
+    ingress:
+      enabled: false
+
+    # Main Open WebUI application configuration
+    replicaCount: 1
+
+    # Disable Ollama (we'll use external Ollama if needed)
+    ollama:
+      enabled: false
+
+    # Disable Pipelines (we'll use external services if needed)
+    pipelines:
+      enabled: false
+
+    # Open WebUI specific configuration
+    openwebui:
+      env:
+        # Basic configuration
+        WEBUI_NAME: "Open WebUI"
+        DEFAULT_LOCALE: "en-US"
+
+        # Security settings
+        ENABLE_SIGNUP: "true"
+        DEFAULT_USER_ROLE: "pending"
+
+        # File upload settings
+        ENABLE_IMAGE_GENERATION: "true"
+        ENABLE_COMMUNITY_SHARING: "false"
+
+        # Database configuration (using SQLite by default)
+        DATABASE_URL: "sqlite:///app/backend/data/webui.db"
+
+    # Persistence for data and models
+    persistence:
+      enabled: true
+      storageClass: "longhorn" # Using your Longhorn storage
+      accessModes:
+        - ReadWriteOnce
+      size: 20Gi
+
+    # Resource limits (adjust based on your needs)
+    resources:
+      limits:
+        cpu: 2000m
+        memory: 4Gi
+      requests:
+        cpu: 500m
+        memory: 1Gi
+
+    # Service configuration
+    service:
+      type: ClusterIP
+      port: 80
+      targetPort: 8080
+
+    # Security context
+    securityContext:
+      runAsNonRoot: false # Open WebUI typically needs to run as root
+      runAsUser: 0
+      runAsGroup: 0
+      fsGroup: 0
+
+    # Pod security context
+    podSecurityContext:
+      fsGroup: 0
+
+    # Health checks
+    livenessProbe:
+      httpGet:
+        path: /health
+        port: 8080
+      initialDelaySeconds: 30
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 3
+
+    readinessProbe:
+      httpGet:
+        path: /health
+        port: 8080
+      initialDelaySeconds: 5
+      periodSeconds: 5
+      timeoutSeconds: 3
+      failureThreshold: 3

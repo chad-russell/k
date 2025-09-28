@@ -12,5 +12,6 @@ resources:
   - tasktrove/
   - searxng/
   - bookmarks/
-  - librechat/
+  # - librechat/
+  - open-webui/
   - mcpx/
