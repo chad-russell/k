@@ -13,5 +13,5 @@ resources:
   - searxng/
   - bookmarks/
   # - librechat/
-  - open-webui/
+  # - open-webui/
   - mcpx/
