@@ -2,6 +2,9 @@ creation_rules:
   - path_regex: apps/.*/config-secret\.yaml$
     encrypted_regex: ^(data|stringData)$
     age: age1nu5dhecwm2tch3yt4jhx8dwyl2n30sv9072jsuy07mgk6zc83d5spxrg7g
+  - path_regex: apps/.*/server-configs\.yaml$
+    encrypted_regex: ^(data|stringData)$
+    age: age1nu5dhecwm2tch3yt4jhx8dwyl2n30sv9072jsuy07mgk6zc83d5spxrg7g
   - path_regex: secrets/.*\.yaml$
     encrypted_regex: ^(data|stringData)$
     age: age1nu5dhecwm2tch3yt4jhx8dwyl2n30sv9072jsuy07mgk6zc83d5spxrg7g

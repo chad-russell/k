@@ -8,6 +8,7 @@ namespace and exposed through Traefik at `mcpjungle.internal.crussell.io`.
 - `namespace.yaml` – dedicated namespace
 - `secrets.yaml` – `DATABASE_URL` secret (encrypt with SOPS before use)
 - `config-secret.yaml` – Admin access token file mounted at `/root/.mcpjungle.conf`
+- `server-configs.yaml` – Secret containing MCP server JSON definitions mounted at `/config`
 - `deployment.yaml` – application Deployment and ClusterIP Service on port 8080
 - `ingress.yaml` – Traefik IngressRoute for TLS termination
 
@@ -79,6 +80,38 @@ restarts.
 
 4. Redeploy (Flux will reconcile automatically) so the pod restarts with the
    mounted token file.
+
+## Registering MCP Servers
+
+JSON definitions for stdio/SSE MCP servers live in `server-configs.yaml` and are
+mounted into the pod at `/config`. Each key becomes a file (for
+example, `server-example.json` → `/mcpjungle/config/server-example.json`).
+
+1. Edit the secret with SOPS and add/update JSON entries:
+   ```bash
+   sops apps/development/mcpjungle/server-configs.yaml
+   ```
+
+2. For every server, keep the JSON structure:
+   ```json
+   {
+     "name": "<name>",
+     "transport": "stdio",
+     "description": "<description>",
+     "command": "<command>",
+     "args": ["arg1", "arg2"],
+     "env": {"KEY": "value"}
+   }
+   ```
+
+3. After saving, run `just sync` (or wait for Flux) so the new secret version is
+   applied and the pod restarts.
+
+4. Register the server inside the pod using the mounted file:
+   ```bash
+   kubectl exec deploy/mcpjungle -n mcpjungle -- \
+     /mcpjungle register -c /mcpjungle/config/<file>.json
+   ```
 
 ## Post-Deployment
 

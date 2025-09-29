@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: mcpjungle-servers
+    namespace: mcpjungle
+type: Opaque
+stringData:
+    server-example.json: ENC[AES256_GCM,data:Siwzg9CuCqNRGvEYlKR/+yCsBRMCJQqR45nhkhMzttEFyIBaxGSWESaueyfevuq3BACqbhJ0E95MKSSvHuxlJbj5LdlpiawWtrc7rQcgBNIaB9OrTX6uVguZGD1W5BFeXB2FPxsrGlcqI67pI7yRdOk83631Lxu5/fs97L+xkU0M22pe0HAnQsEMdMZp41rvTSIzvT8NBIAXw50wpPLfajHD3ul1jdxLS1XucIKIYCVwRqC03rEPhCSzpvAysoDMUZjXi8gkYLUtekZlMeVrhtXvNJD4+tvXzgwPqYcXMnsbK4yA1iykugNyFtzOqfY41ECShr2XyzTZKMZXkhh3V6eAPQhsDh66B2tkUxoNVZeK0xejlNDICDLs0aTUJrYg4qMJ1SQOCIUpzCYeS5XVJnx2VsRNkI82tJtHOBlzmvRcU4JmEG5Hq0T00Z8oqwRoIBgTMJqAzpn1ICYzRYO0sywDYCH/QTqux9TsQ7/dbjkBqubNxvXf9d/5TwMm6zwYSDiUgRRtrjXtP9jQhHkbcjMwqZPuYIatVPiu9mew1eUonxrj9hTn5ZGz/9tsaPayP994Y1OfUUQkfo4tVJZO7mtd3cjmS/aES9NYN1Te13LawshtiwvvScs7Ak7f8592LliUUBD6KdLJh8xGg0lhRNyemwBasmnoDbQSuIpFeDebSC8CRRrUVCDzk30DPpGnXUtPpMSYYTIlmThk6rCKl8MHXZVrdYfT4u51talhh8ikiv1g0WbUthQIWI9hhBRCO17AF+6zRcZNGxaxL+w9Kg1VqYQM0FzjFDAgxJFnx14bV7Wyg81mxbyLmYQmPsajmgifzEujZQ7RPw==,iv:J8FL4mXO7D+mpoa5s8QrqnS+RibFkctN97KYpf3zdlI=,tag:YiP99N0n1XyF2I6WX0j2Eg==,type:str]
+sops:
+    age:
+        - recipient: age1nu5dhecwm2tch3yt4jhx8dwyl2n30sv9072jsuy07mgk6zc83d5spxrg7g
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBaSG1yY3Jxc2xnYkJPbndL
+            SS9VVW5hZDNFSkgzK3pYYVlBdTk1T2loSGpvCjJKSTRJQmVwUkN0MnhmSUtMSWU4
+            VW9Kc2xIeGpnWkRHT3FOVm1oNXl3b0UKLS0tIGFETUhhTGdGWWFZYmw1dUIzUVBw
+            UDVlNVMvTnJyS0dtVmNxTmNLLzFkNFEKQid9m09PYUYSY5zFA7gOE0l/Vi1/QWHe
+            cDhFjByLIKnv/JHUDEcAv71QcP0DHd/zqY+vSX0HZjQiJJqqveXGLQ==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-09-29T15:49:26Z"
+    mac: ENC[AES256_GCM,data:nu6w3Lgd6teTzjQxW3lIhA2VCFh/6Akq2J+NiRXpQloGHAvTjURU+iyab9QrAPDIq8dQmVUNTJW/g6USwiCSBJnx2aGibZnFs422Px6b3A6DKYZ7V5g/Wn5pY5nX8tFIRoeTux+Md7hNpBAnvoa+uCF7UZ5SLLXV3snPv7sRzXI=,iv:BTLogfK/5CvTicoFmr58aqj/8hiQVxa1DawK59DK8YM=,tag:Z4mWZPYhuUHrVJLsmRpsog==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.10.2

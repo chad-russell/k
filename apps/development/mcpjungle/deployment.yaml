@@ -34,6 +34,9 @@ spec:
               mountPath: /root/.mcpjungle.conf
               subPath: mcpjungle.conf
               readOnly: true
+            - name: server-configs
+              mountPath: /config
+              readOnly: true
           resources:
             requests:
               memory: "256Mi"
@@ -58,3 +61,6 @@ spec:
             items:
               - key: mcpjungle.conf
                 path: mcpjungle.conf
+        - name: server-configs
+          secret:
+            secretName: mcpjungle-servers
