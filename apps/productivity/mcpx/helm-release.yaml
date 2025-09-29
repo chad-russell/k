@@ -37,14 +37,10 @@ spec:
               }
             },
             "graphiti-memory": {
-              "command": "uvx",
+              "command": "sh",
               "args": [
-                "montesmakes.graphiti-memory",
-                "--",
-                "--transport",
-                "stdio",
-                "--group-id",
-                "default"
+                "-lc",
+                "PATH=/tmp/bin:$PATH; mkdir -p /tmp/bin; echo '#!/bin/sh' > /tmp/bin/realpath; echo '[ \"$1\" = \"--\" ] && shift' >> /tmp/bin/realpath; echo 'busybox realpath \"$@\"' >> /tmp/bin/realpath; chmod +x /tmp/bin/realpath; exec uvx montesmakes.graphiti-memory --transport stdio --group-id default"
               ],
               "env": {
                 "NEO4J_URI": "$(NEO4J_URI)",
