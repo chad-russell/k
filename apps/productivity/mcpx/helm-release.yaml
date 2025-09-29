@@ -37,14 +37,13 @@ spec:
               }
             },
             "graphiti-memory": {
-              "command": "/usr/bin/uv",
+              "command": "uvx",
               "args": [
-                "x",
                 "montesmakes.graphiti-memory",
                 "--transport",
                 "stdio",
                 "--group-id",
-                "mcpx"
+                "default"
               ],
               "env": {
                 "NEO4J_URI": "$(NEO4J_URI)",
