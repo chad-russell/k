@@ -22,9 +22,6 @@ spec:
       limits:
         cpu: 500m
         memory: 1Gi
-    envFrom:
-      - secretRef:
-          name: mcpx-graphiti-env
     config:
       mcpJson: |
         {

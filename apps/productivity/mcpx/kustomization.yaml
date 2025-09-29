@@ -8,4 +8,3 @@ resources:
   - helm-repository.yaml
   - helm-release.yaml
   - ingress.yaml
-  - secrets.yaml
