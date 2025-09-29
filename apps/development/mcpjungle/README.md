@@ -7,6 +7,7 @@ namespace and exposed through Traefik at `mcpjungle.internal.crussell.io`.
 
 - `namespace.yaml` – dedicated namespace
 - `secrets.yaml` – `DATABASE_URL` secret (encrypt with SOPS before use)
+- `config-secret.yaml` – Admin access token file mounted at `/root/.mcpjungle.conf`
 - `deployment.yaml` – application Deployment and ClusterIP Service on port 8080
 - `ingress.yaml` – Traefik IngressRoute for TLS termination
 
@@ -51,6 +52,33 @@ database and user for MCP Jungle:
 5. Save the file – SOPS will re-encrypt it automatically. Commit the encrypted
    secret and allow Flux to reconcile. The Deployment will reference the
    `mcpjungle-postgres` secret once it is present in the cluster.
+
+## Persisting the Admin Token
+
+The `/mcpjungle init-server` command writes an admin access token to
+`/root/.mcpjungle.conf`. Because container root filesystems are ephemeral, the
+Deployment mounts `config-secret.yaml` at that path so the token survives pod
+restarts.
+
+1. Run the init command once inside the running pod:
+   ```bash
+   kubectl exec -it deploy/mcpjungle -n mcpjungle -- /mcpjungle init-server
+   ```
+
+2. Capture the generated config file:
+   ```bash
+   kubectl exec deploy/mcpjungle -n mcpjungle -- cat /root/.mcpjungle.conf
+   ```
+
+3. Edit `config-secret.yaml` with SOPS and paste the file contents:
+   ```bash
+   sops apps/development/mcpjungle/config-secret.yaml
+   ```
+   Replace `CHANGE_ME_TOKEN` with the `access_token` value (and adjust
+   `registry_url` if needed). Save to re-encrypt.
+
+4. Redeploy (Flux will reconcile automatically) so the pod restarts with the
+   mounted token file.
 
 ## Post-Deployment
 
