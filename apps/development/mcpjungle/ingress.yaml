@@ -1,16 +1,16 @@
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: mcpx
-  namespace: mcpx
+  name: mcpjungle
+  namespace: mcpjungle
 spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`mcpx.internal.crussell.io`)
+    - match: Host(`mcpjungle.internal.crussell.io`)
       kind: Rule
       services:
-        - name: mcpx
-          port: 9000
+        - name: mcpjungle
+          port: 8080
   tls:
     certResolver: letsencrypt

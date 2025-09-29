@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mcpjungle
+  namespace: mcpjungle
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mcpjungle
+  template:
+    metadata:
+      labels:
+        app: mcpjungle
+    spec:
+      containers:
+        - name: mcpjungle
+          image: mcpjungle/mcpjungle:latest-stdio
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: mcpjungle-postgres
+                  key: DATABASE_URL
+            - name: SERVER_MODE
+              value: "enterprise"
+            - name: OTEL_ENABLED
+              value: "false"
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "200m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          readinessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 10
