@@ -37,9 +37,8 @@ spec:
               }
             },
             "graphiti-memory": {
-              "command": "/usr/bin/uv",
+              "command": "/usr/bin/uvx",
               "args": [
-                "x",
                 "montesmakes.graphiti-memory",
                 "--transport",
                 "stdio",
