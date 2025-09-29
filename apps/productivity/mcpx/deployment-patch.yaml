@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mcpx
+spec:
+  template:
+    spec:
+      containers:
+        - name: mcpx
+          volumeMounts:
+            - name: graphiti-data
+              mountPath: /opt/graphiti
+      volumes:
+        - name: graphiti-data
+          persistentVolumeClaim:
+            claimName: mcpx-graphiti

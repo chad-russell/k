@@ -8,3 +8,7 @@ resources:
   - helm-repository.yaml
   - helm-release.yaml
   - ingress.yaml
+  - pvc.yaml
+
+patchesStrategicMerge:
+  - deployment-patch.yaml
