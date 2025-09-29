@@ -14,18 +14,6 @@ spec:
         name: lunar
         namespace: mcpx
       interval: 1h
-  postRenderers:
-    - kustomize:
-        patchesStrategicMerge:
-          - |
-            apiVersion: apps/v1
-            kind: Deployment
-            metadata:
-              name: mcpx
-              namespace: mcpx
-            spec:
-              strategy:
-                type: Recreate
   values:
     resources:
       requests:
@@ -47,24 +35,6 @@ spec:
               "env": {
                 "SEARXNG_URL": "http://searxng.searxng.svc.cluster.local:8080"
               }
-            },
-            "graphiti-memory": {
-              "command": "sh",
-              "args": [
-                "-lc",
-                "PATH=/tmp/bin:$PATH; mkdir -p /tmp/bin; echo '#!/bin/sh' > /tmp/bin/realpath; echo '[ \"$1\" = \"--\" ] && shift' >> /tmp/bin/realpath; echo 'busybox realpath \"$@\"' >> /tmp/bin/realpath; chmod +x /tmp/bin/realpath; exec uvx montesmakes.graphiti-memory --transport stdio --group-id default"
-              ],
-              "env": {
-                "NEO4J_URI": "$(NEO4J_URI)",
-                "NEO4J_USER": "$(NEO4J_USER)",
-                "NEO4J_PASSWORD": "$(NEO4J_PASSWORD)",
-                "OPENAI_API_KEY": "$(OPENAI_API_KEY)",
-                "OPENAI_BASE_URL": "$(OPENAI_BASE_URL)",
-                "MODEL_NAME": "$(MODEL_NAME)",
-                "SMALL_MODEL_NAME": "$(SMALL_MODEL_NAME)",
-                "GRAPHITI_TELEMETRY_ENABLED": "$(GRAPHITI_TELEMETRY_ENABLED)",
-                "SEMAPHORE_LIMIT": "$(SEMAPHORE_LIMIT)"
-              }
             }
           }
         }
@@ -75,3 +45,22 @@ spec:
           base: "allow"
         toolExtensions:
           services: {}
+
+# "graphiti-memory": {
+#   "command": "sh",
+#   "args": [
+#     "-lc",
+#     "PATH=/tmp/bin:$PATH; mkdir -p /tmp/bin; echo '#!/bin/sh' > /tmp/bin/realpath; echo '[ \"$1\" = \"--\" ] && shift' >> /tmp/bin/realpath; echo 'busybox realpath \"$@\"' >> /tmp/bin/realpath; chmod +x /tmp/bin/realpath; exec uvx montesmakes.graphiti-memory --transport stdio --group-id default"
+#   ],
+#   "env": {
+#     "NEO4J_URI": "$(NEO4J_URI)",
+#     "NEO4J_USER": "$(NEO4J_USER)",
+#     "NEO4J_PASSWORD": "$(NEO4J_PASSWORD)",
+#     "OPENAI_API_KEY": "$(OPENAI_API_KEY)",
+#     "OPENAI_BASE_URL": "$(OPENAI_BASE_URL)",
+#     "MODEL_NAME": "$(MODEL_NAME)",
+#     "SMALL_MODEL_NAME": "$(SMALL_MODEL_NAME)",
+#     "GRAPHITI_TELEMETRY_ENABLED": "$(GRAPHITI_TELEMETRY_ENABLED)",
+#     "SEMAPHORE_LIMIT": "$(SEMAPHORE_LIMIT)"
+#   }
+# }
