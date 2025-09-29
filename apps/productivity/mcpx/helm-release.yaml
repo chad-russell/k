@@ -14,6 +14,18 @@ spec:
         name: lunar
         namespace: mcpx
       interval: 1h
+  postRenderers:
+    - kustomize:
+        patchesStrategicMerge:
+          - |
+            apiVersion: apps/v1
+            kind: Deployment
+            metadata:
+              name: mcpx
+              namespace: mcpx
+            spec:
+              strategy:
+                type: Recreate
   values:
     resources:
       requests:
