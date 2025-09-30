@@ -121,3 +121,8 @@ example, `server-example.json` → `/mcpjungle/config/server-example.json`).
   ```
 - Confirm the app is reachable through Traefik at
   `https://mcpjungle.internal.crussell.io`.
+
+- Exec into the running pod, and activate any servers:
+  ```
+  /mcpjungle register -c /config/server-config.json
+  ```
